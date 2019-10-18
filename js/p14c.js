@@ -1,20 +1,20 @@
 // variable definitions and building authorization url
 type = 'text/javascript';
 const environmentId = 'e2431bcc-0d0b-4574-9dbc-ff8c91bb799e'; // available on settings page of p14c admin console
-const baseUrl = 'https://techsmith.ping-eng.com/'; // URL of where you will host this application
+const baseUrl = 'https://morganapps.ping-eng.com/'; // URL of where you will host this application
 
 const scopes = 'openid profile email address phone'; // default scopes to request
 const responseType = 'token id_token'; // tokens to recieve
 
 const adminClientId = 'd7e75461-f459-48bd-b360-db34e3fbe98f';
 const adminClientSecret = 'loIpvqBs2Sn-iJRirs95R8R.tlCHJyFAolbC8s7W-42.C5XQtesxiAzHi1hO0.rp';
-const adminRedirectUri = baseUrl + 'techsmith/content/finance/admin-login.html'
+const adminRedirectUri = baseUrl + 'myP14CDemo/content/finance/admin-login.html'
 
 const authClientID = '4ac20fda-ac90-4864-84b3-342f22722203';
 
-const landingUrl = baseUrl + 'techsmith/index-finance.html'; // url to send the person once authentication is complete
+const landingUrl = baseUrl + 'myP14CDemo/index-finance.html'; // url to send the person once authentication is complete
 const logoutUrl = baseUrl + 'logout/'; // whitelisted url to send a person who wants to logout
-const redirectUri = baseUrl + 'techsmith/index-finance.html'; // whitelisted url P14C sends the token or code to
+const redirectUri = baseUrl + 'myP14CDemo/index-finance.html'; // whitelisted url P14C sends the token or code to
 
 const authUrl = 'https://auth.pingone.com';
 const apiUrl = 'https://api.pingone.com/v1';
@@ -313,8 +313,7 @@ function getAccessToken(){
     beforeSend: function(xhr) {
         xhr.setRequestHeader(
             "Authorization", "Basic ZGM0M2I0M2UtMWEzZS00ZDFmLWJhY2ItMjgwZGZiNTNlODM1OjBLTWpQSTNZR1Y0Q2JCSH5WRkljLjlqTlJPR3dGQ2Y5T1Fzb216aV9iR3R4WnpraHBKeEdaeUZaOX5oRF9zNUg="
-          //"access-control-allow-origin", "https://techsmith.ping-eng.com"
-    )},
+              )},
     headers: {
       "Content-Type": "application/json",
       //"Authorization": "Basic ZGM0M2I0M2UtMWEzZS00ZDFmLWJhY2ItMjgwZGZiNTNlODM1OjBLTWpQSTNZR1Y0Q2JCSH5WRkljLjlqTlJPR3dGQ2Y5T1Fzb216aV9iR3R4WnpraHBKeEdaeUZaOX5oRF9zNUg=",

@@ -1,18 +1,18 @@
 // variable definitions and building authorization url
 type="text/javascript";
 const environmentId = 'e2431bcc-0d0b-4574-9dbc-ff8c91bb799e'; // available on settings page of p14c admin console
-const baseUrl = 'https://techsmith.ping-eng.com/'; // URL of where you will host this application
+const baseUrl = 'https://morganapps.ping-eng.com/'; // URL of where you will host this application
 const scopes = 'openid profile email address phone'; // default scopes to request
 const responseType = 'token id_token'; //tokens to recieve
 
-const authClientId = 'd7e75461-f459-48bd-b360-db34e3fbe98f';
-const authClientSecret = 'loIpvqBs2Sn-iJRirs95R8R.tlCHJyFAolbC8s7W-42.C5XQtesxiAzHi1hO0.rp';
-const adminRedirectUri =baseUrl + 'techsmith/content/finance/admin-login.html'
+const authClientId = '77838143-24eb-4223-9eeb-8559baa52c5a';
+const authClientSecret = 'w7TxHDpxX2hECtHc4g9bh~M_GwcNMMLF4VmQOUFc0LAS1JQ.PN86mUdmzjpk2KCY';
+const adminRedirectUri =baseUrl + 'myP14CDemo/content/finance/admin-login.html'
 
 const cookieDomain = ''; // unnecessary unless using subdomains (e.g., login.example.com, help.example.com, docs.example.com).  Then use a common root (e.g., .example.com)
-const landingUrl = baseUrl + 'techsmith/index-finance.html'; // url to send the person once authentication is complete
+const landingUrl = baseUrl + 'myP14CDemo/index-finance.html'; // url to send the person once authentication is complete
 const logoutUrl = baseUrl + 'logout/'; // whitelisted url to send a person who wants to logout
-const redirectUri = baseUrl + 'techsmith/index-finance.html'; // whitelisted url P14C sends the token or code to
+const redirectUri = baseUrl + 'myP14CDemo/index-finance.html'; // whitelisted url P14C sends the token or code to
 
 const authUrl = 'https://auth.pingone.com';
 const apiUrl = 'https://api.pingone.com/v1';
