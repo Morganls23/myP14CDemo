@@ -2,15 +2,15 @@
 type="text/javascript";
 const environmentId = 'e2431bcc-0d0b-4574-9dbc-ff8c91bb799e'; // available on settings page of p14c admin console
 const clientId = 'dc43b43e-1a3e-4d1f-bacb-280dfb53e835'; // available on connections tab of admin console
-const baseUrl = 'https://techsmith.ping-eng.com/'; // URL of where you will host this application
+const baseUrl = 'https://morganapps.ping-eng.com/'; // URL of where you will host this application
 const clientsecret = '0KMjPI3YGV4CbBH~VFIc.9jNROGwFCf9OQsomzi_bGtxZzkhpJxGZyFZ9~hD_s5H';
 const scopes = 'openid profile email address phone'; // default scopes to request
 const responseType = 'token id_token'; //tokens to recieve
 
 const cookieDomain = ''; // unnecessary unless using subdomains (e.g., login.example.com, help.example.com, docs.example.com).  Then use a common root (e.g., .example.com)
-const landingUrl = baseUrl + 'techsmith/index-finance.html'; // url to send the person once authentication is complete
+const landingUrl = baseUrl + 'myP14CDemo/index-finance.html'; // url to send the person once authentication is complete
 const logoutUrl = baseUrl + 'logout/'; // whitelisted url to send a person who wants to logout
-const redirectUri = baseUrl + 'techsmith/index-finance.html'; // whitelisted url P14C sends the token or code to
+const redirectUri = baseUrl + 'myP14CDemo/index-finance.html'; // whitelisted url P14C sends the token or code to
 
 const authUrl = 'https://auth.pingone.com';
 const apiUrl = 'https://api.pingone.com/v1';
@@ -335,7 +335,6 @@ function getAccessToken(){
     beforeSend: function(xhr) {
         xhr.setRequestHeader(
             "Authorization", "Basic ZGM0M2I0M2UtMWEzZS00ZDFmLWJhY2ItMjgwZGZiNTNlODM1OjBLTWpQSTNZR1Y0Q2JCSH5WRkljLjlqTlJPR3dGQ2Y5T1Fzb216aV9iR3R4WnpraHBKeEdaeUZaOX5oRF9zNUg="
-          //"access-control-allow-origin", "https://techsmith.ping-eng.com"
     )},
     headers: {
       "Content-Type": "application/json",
