@@ -23,7 +23,6 @@ const userAuthScopes = 'p1:read:self:user';
 
 const flowId = getUrlParameter('flowId');
 
-
 const regexLower = new RegExp('(?=.*[a-z])');
 const regexUpper = new RegExp('(?=.*[A-Z])');
 const regexNumeric = new RegExp('(?=.*[0-9])');
