@@ -6,16 +6,11 @@ const baseUrl = 'https://morganapps.ping-eng.com/'; // URL of where you will hos
 const scopes = 'openid profile email address phone'; // default scopes to request
 const responseType = 'token id_token'; // tokens to recieve
 
-const adminClientId = 'd7e75461-f459-48bd-b360-db34e3fbe98f';
-const adminClientSecret = 'loIpvqBs2Sn-iJRirs95R8R.tlCHJyFAolbC8s7W-42.C5XQtesxiAzHi1hO0.rp';
-const adminRedirectUri = baseUrl + 'myP14CDemo/content/finance/admin-login.html'
-
-const authClientID = '4ac20fda-ac90-4864-84b3-342f22722203';
-
 const landingUrl = baseUrl + 'myP14CDemo/index-finance.html'; // url to send the person once authentication is complete
 const logoutUrl = baseUrl + 'logout/'; // whitelisted url to send a person who wants to logout
 const redirectUri = baseUrl + 'myP14CDemo/index-finance.html'; // whitelisted url P14C sends the token or code to
 
+const clientId = '7606b740-bb4b-4253-b449-aabf5b66e7eb';
 const authUrl = 'https://auth.pingone.com';
 const apiUrl = 'https://api.pingone.com/v1';
 
@@ -36,11 +31,11 @@ const authorizationUrl =
   '/' +
   environmentId +
   '/as/authorize?client_id=' +
-  adminClientId +
+  clientId +
   '&response_type=' +
   responseType +
   '&redirect_uri=' +
-  adminRedirectUri +
+  redirectUri +
   '&scope=' +
   scopes;
 

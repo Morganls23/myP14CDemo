@@ -1,6 +1,6 @@
 // variable definitions and building authorization url
 type="text/javascript";
-const environmentId = 'e2431bcc-0d0b-4574-9dbc-ff8c91bb799e'; // available on settings page of p14c admin console
+const environmentId = '7334523a-4a2d-4dd6-9f37-93c60114e938'; // available on settings page of p14c admin console
 const baseUrl = 'https://morganapps.ping-eng.com/'; // URL of where you will host this application
 const scopes = 'openid profile email address phone'; // default scopes to request
 const responseType = 'token id_token'; //tokens to recieve
@@ -27,33 +27,6 @@ const regexNumeric = new RegExp('(?=.*[0-9])');
 const regexSpecial = new RegExp('(?=.*[~!@#\$%\^&\*\)\(\|\;\:\,\.\?\_\-])');
 const regexLength = new RegExp('(?=.{8,})');
 
-// build the authorization url in case we need it
-
-const authorizationUrl =
-  authUrl +
-  '/' +
-  environmentId +
-  '/as/authorize?client_id=' +
-  clientId +
-  '&response_type=' +
-  responseType +
-  '&redirect_uri=' +
-  redirectUri +
-  '&scope=' +
-  scopes;
-
-const adminAuthorizationUrl =
-  authUrl +
-  '/' +
-  environmentId +
-  '/as/authorize?client_id=' +
-  adminClientId +
-  '&response_type=' +
-  responseType +
-  '&redirect_uri=' +
-  adminRedirectUri +
-  '&scope=' +
-  scopes;
 
 // function to generate random nonce
 
