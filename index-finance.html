@@ -482,47 +482,42 @@
     <script src="js/p14c.js"></script>
 
     <script>
-        jQuery(window).load(function() {
-            var retina = window.devicePixelRatio > 1 ? true : false;
-            if (retina) {
-                var retinaEl = jQuery("#logo img");
-                var retinaLogoW = retinaEl.width();
-                var retinaLogoH = retinaEl.height();
-                retinaEl.attr("src", "content/finance/images/retina-finance.png").width(retinaLogoW).height(retinaLogoH)
-            }
-        });
+jQuery(window).load(function() {
+  var retina = window.devicePixelRatio > 1 ? true : false;
+  if (retina) {
+    var retinaEl = jQuery("#logo img");
+    var retinaLogoW = retinaEl.width();
+    var retinaLogoH = retinaEl.height();
+    retinaEl.attr("src", "content/finance/images/retina-finance.png").width(retinaLogoW).height(retinaLogoH)
+  }
+});
+// some housekeeping variables
 
+$('#changePassword').on('input', function (e) {
+  let thisPassword = $('#changePassword').val();
 
-        
-                // some housekeeping variables
+if (regexLower.test(thisPassword)) {
+  $('#lowercase').removeClass('text-primary');
+  } else {
+    $('#lowercase').addClass('text-primary');
+  }
+  if (regexUpper.test(thisPassword)) {
+    $('#uppercase').removeClass('text-primary');
+  } else {
+    $('#uppercase').addClass('text-primary');
+  }
 
+  if (regexNumeric.test(thisPassword)) {
+    $('#numeric').removeClass('text-primary');
+  } else {
+    $('#numeric').addClass('text-primary');
+  }
 
-        $('#changePassword').on('input', function (e) {
-          let thisPassword = $('#changePassword').val();
-
-          if (regexLower.test(thisPassword)) {
-            $('#lowercase').removeClass('text-primary');
-          } else {
-            $('#lowercase').addClass('text-primary');
-          }
-
-          if (regexUpper.test(thisPassword)) {
-            $('#uppercase').removeClass('text-primary');
-          } else {
-            $('#uppercase').addClass('text-primary');
-          }
-
-          if (regexNumeric.test(thisPassword)) {
-            $('#numeric').removeClass('text-primary');
-          } else {
-            $('#numeric').addClass('text-primary');
-          }
-
-          if (regexSpecial.test(thisPassword)) {
-            $('#special').removeClass('text-primary');
-          } else {
-            $('#special').addClass('text-primary');
-          }
+  if (regexSpecial.test(thisPassword)) {
+    $('#special').removeClass('text-primary');
+  } else {
+    $('#special').addClass('text-primary');
+  }
 
           if (regexLength.test(thisPassword)) {
             $('#length').removeClass('text-primary');
