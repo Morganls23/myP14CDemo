@@ -1,19 +1,17 @@
 // variable definitions and building authorization url
-type="text/javascript";
+type = 'text/javascript';
 const environmentId = 'e2431bcc-0d0b-4574-9dbc-ff8c91bb799e'; // available on settings page of p14c admin console
-const clientId = 'dc43b43e-1a3e-4d1f-bacb-280dfb53e835'; // available on connections tab of admin console
 const baseUrl = 'https://techsmith.ping-eng.com/'; // URL of where you will host this application
-const clientsecret = '0KMjPI3YGV4CbBH~VFIc.9jNROGwFCf9OQsomzi_bGtxZzkhpJxGZyFZ9~hD_s5H';
+
 const scopes = 'openid profile email address phone'; // default scopes to request
-const responseType = 'token id_token'; //tokens to recieve
+const responseType = 'token id_token'; // tokens to recieve
 
 const adminClientId = 'd7e75461-f459-48bd-b360-db34e3fbe98f';
 const adminClientSecret = 'loIpvqBs2Sn-iJRirs95R8R.tlCHJyFAolbC8s7W-42.C5XQtesxiAzHi1hO0.rp';
-const adminRedirectUri =baseUrl + 'techsmith/content/finance/admin-login.html'
+const adminRedirectUri = baseUrl + 'techsmith/content/finance/admin-login.html'
 
 const authClientID = '4ac20fda-ac90-4864-84b3-342f22722203';
 
-const cookieDomain = ''; // unnecessary unless using subdomains (e.g., login.example.com, help.example.com, docs.example.com).  Then use a common root (e.g., .example.com)
 const landingUrl = baseUrl + 'techsmith/index-finance.html'; // url to send the person once authentication is complete
 const logoutUrl = baseUrl + 'logout/'; // whitelisted url to send a person who wants to logout
 const redirectUri = baseUrl + 'techsmith/index-finance.html'; // whitelisted url P14C sends the token or code to
@@ -39,19 +37,6 @@ const authorizationUrl =
   '/' +
   environmentId +
   '/as/authorize?client_id=' +
-  clientId +
-  '&response_type=' +
-  responseType +
-  '&redirect_uri=' +
-  redirectUri +
-  '&scope=' +
-  scopes;
-
-const adminAuthorizationUrl =
-  authUrl +
-  '/' +
-  environmentId +
-  '/as/authorize?client_id=' +
   adminClientId +
   '&response_type=' +
   responseType +
@@ -60,34 +45,7 @@ const adminAuthorizationUrl =
   '&scope=' +
   scopes;
 
-
-
-function doLogin() {
-  let nonce = generateNonce(60);
-  let authorizationUrl =
-    authUrl +
-    '/' +
-    environmentId +
-    '/as/authorize?response_type=' +
-    responseType +
-    '&client_id=' +
-    clientId +
-    '&redirect_uri=' +
-    redirectUri +
-    '&scope=' +
-    scopes +
-    '&nonce=' +
-    nonce;
-
-  window.localStorage.setItem('nonce', nonce);
-
-  // window.localStorage.setItem('nonce', 'bogus nonce that does not match');
-
-  window.location.href = authorizationUrl;
-}
-
 // simple function to parse json web token
-
 function parseJwt(token) {
   console.log("parseJWT was called");
   var base64Url = token.split('.')[1];
@@ -520,22 +478,6 @@ function changePassword() {
   });
   let url = $('#changePasswordUrl').val();
   let contenttype = $('#changePasswordContentType').val();
-  exJax('POST', url, nextStep, contenttype, payload);
-}
-
-// validate password function
-function validatePassword() {
-  console.log('validatePassword called');
-  let payload = JSON.stringify({
-    username: $('#user_login').val(),
-    password: $('#user_pass').val()
-  });
-  console.log('payload is ' + payload)
-  let url = $('#validatePasswordUrl').val();
-  //let url = (authUrl + environmentId + '/flows/' + flowId);
-  console.log('url is: ' + url);
-  let contenttype = 'application/vnd.pingidentity.usernamePassword.check+json';
-  console.log('contenttype is ' + contenttype);
   exJax('POST', url, nextStep, contenttype, payload);
 }
 
