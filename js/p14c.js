@@ -3,7 +3,7 @@ type = 'text/javascript';
 const environmentId = '7334523a-4a2d-4dd6-9f37-93c60114e938'; // available on settings page of p14c admin console
 const baseUrl = 'https://morganapps.ping-eng.com/'; // URL of where you will host this application
 
-const scopes = 'openid profile email address phone'; // default scopes to request
+const scopes = 'openid profile email address phone p1:update:user p1:read:user'; // default scopes to request
 const responseType = 'token id_token'; // tokens to recieve
 
 const landingUrl = baseUrl + 'myP14CDemo/index-finance.html'; // url to send the person once authentication is complete
@@ -60,18 +60,17 @@ function generateNonce(length) {
 }
 
 
-function renderDivState(){
+function renderDivState() {
   console.log("renderDiv called");
   console.log(Cookies.get('accessToken'));
 
-  if(Cookies.get('accessToken')){
+  if (Cookies.get('accessToken')) {
     let login = document.getElementById("loginDiv");
     login.style.display = "none";
     let account = document.getElementById("myAccount");
     account.style.display = "block";
 
-  }
-  else {
+  } else {
     let login = document.getElementById("loginDiv");
     login.style.display = "block";
 
@@ -136,12 +135,12 @@ function getUrlParameter(parameterName) {
   let pageUrl = window.location.href;
   let pound = "#";
   let q = "?";
-  let simpleUrl = pageUrl.substring(0,pageUrl.indexOf(pound));
+  let simpleUrl = pageUrl.substring(0, pageUrl.indexOf(pound));
   console.log("simple url: " + simpleUrl);
   console.log('pageUrl: ' + pageUrl);
   if (pageUrl.includes(pound)) {
     console.log("pageUrl is not null and has #");
-    pageUrl = pageUrl.substring(pageUrl.indexOf(pound)+1);
+    pageUrl = pageUrl.substring(pageUrl.indexOf(pound) + 1);
     console.log("removed base at #:" + pageUrl);
     let urlVariables = pageUrl.split('&');
 
@@ -149,16 +148,16 @@ function getUrlParameter(parameterName) {
     for (let i = 0; i < urlVariables.length; i++) {
       let thisParameterName = urlVariables[i].split('=');
       if (thisParameterName[0] == parameterName) {
-        console.log("parameterName:"+thisParameterName[1]);
+        console.log("parameterName:" + thisParameterName[1]);
         return thisParameterName[1];
       }
-      if(thisParameterName[0].includes("access_token")){
+      if (thisParameterName[0].includes("access_token")) {
         console.log("setting at cookie : " + thisParameterName[1]);
         Cookies.set('accessToken', thisParameterName[1]);
       }
-      if(thisParameterName[0].includes("id_token")){
+      if (thisParameterName[0].includes("id_token")) {
         console.log("setting id cookie : " + thisParameterName[1]);
-        let idToken=thisParameterName[1];
+        let idToken = thisParameterName[1];
         Cookies.set('idToken', idToken);
         setUserinfoCookie();
       }
@@ -187,111 +186,117 @@ function getUrlParameter(parameterName) {
 }
 
 
-function setUserinfoCookie(){
+function setUserinfoCookie() {
   let idToken = Cookies.get('idToken');
   let idPayload = parseJwt(idToken);
   Cookies.set('uuid', idPayload.sub);
   //Cookies.set('name', idPayload.given_name);
 }
 
-function setUserValues(userJson){
+function setUserValues(userJson) {
   console.log("setuserValues was called");
   console.log(userJson);
   let uuid = Cookies.get('uuid');
   //let streetAddress = userJson.address.streetAddress + " " + userJson.address.locality + ", " + userJson.address.region + " " + userJson.address.postalCode;
-  if (Cookies.get("accessToken")){
-    document.getElementById("user").value='Hello ' + userJson.name.given +"!";
-    document.getElementById("fname").value=userJson.name.given;
-    document.getElementById("lname").value=userJson.name.family;
-    document.getElementById("email").value=userJson.email;
-    document.getElementById("username").value=userJson.username;
+  if (Cookies.get("accessToken")) {
+    document.getElementById("user").value = 'Hello ' + userJson.name.given + "!";
+    document.getElementById("fname").value = userJson.name.given;
+    document.getElementById("lname").value = userJson.name.family;
+    document.getElementById("email").value = userJson.email;
+    document.getElementById("username").value = userJson.username;
     //document.getElementById("address").innerHTML=streetAddress;
   } else {
-    document.getElementById("username").innerHTML='Welcome Guest';
+    document.getElementById("username").innerHTML = 'Welcome Guest';
   }
 
   //let idPayload = parseJwt(idToken);
 }
 
-function getUserValues(){
-  console.log("getUserValues called");
+function getUserValues() {
+  console.log('getUserValues called');
   let method = "GET";
   let user = Cookies.get("uuid");
   let at = "Bearer " + Cookies.get("accessToken");
   let url = apiUrl + "/environments/" + environmentId + "/users/" + user;
   console.log('ajax (' + url + ')');
-  console.log('at =' +at);
+  console.log('at =' + at);
+  console.log("make ajax call");
+  $.ajax({
+    async: "true",
+    url: url,
+    method: method,
+    beforeSend: function(xhr) {
+      xhr.setRequestHeader('Authorization', at);
+    }
+  }).done(function(response) {
+    console.log(response);
+    setUserValues(response);
+  });
+  console.log("getUserValues completed")
+
+}
+
+function getValueFromJson(obj, label) {
+  if (obj.label === label) {
+    return obj;
+  }
+  for (let i in obj) {
+    if (obj.hasOwnProperty(i)) {
+      let foundLabel = findObjectByLabel(obj[i], label);
+      if (foundLabel) {
+        return foundLabel;
+      }
+    }
+  }
+  return null;
+}
+
+
+function updateUser() {
+  console.log("updateUser was called");
+  let method = "PATCH";
+  let user = Cookies.get("uuid");
+  let at = "Bearer " + Cookies.get("accessToken");
+  let url = apiUrl + "/environments/" + environmentId + "/users/" + user;
+  let payload = JSON.stringify({
+    username: $('#username').val(),
+    name: {
+      given: $('#fname').val(),
+      family: $('#lname').val()
+    }
+  });
+  console.log(payload);
+  console.log('ajax (' + url + ')');
+  console.log('at =' + at);
   console.log("make ajax call");
   $.ajax({
       async: "true",
       url: url,
       method: method,
+      dataType: 'json',
+      contentType: 'application/json',
+      data: payload,
       beforeSend: function(xhr) {
-          xhr.setRequestHeader('Authorization', at);
+        xhr.setRequestHeader('Authorization', at);
       }
-    }).done(function(response) {
-      console.log(response);
-      setUserValues(response);
+    }).done(function(data) {
+      console.log(data);
+    })
+    .fail(function(data) {
+      console.log('ajax call failed');
+      console.log(data);
+      $('#warningMessage').text(data.responseJSON.details[0].message);
+      $('#warningDiv').show();
     });
-  console.log("getUserValues completed")
+
+  //add brief delay so info is populated
+  setTimeout(function() {
+    getUserValues();
+  }, 1000);
 
 }
 
-function getValueFromJson(obj, label){
-   if(obj.label === label) { return obj; }
-   for(let i in obj) {
-       if(obj.hasOwnProperty(i)){
-           let foundLabel = findObjectByLabel(obj[i], label);
-           if(foundLabel) { return foundLabel; }
-       }
-   }
-   return null;
-}
-
-
-function updateUser(){
-  console.log("updateUser was called");
-    let method = "PATCH";
-    let user = Cookies.get("uuid");
-    let at = "Bearer " + Cookies.get("accessToken");
-    let url = apiUrl + "/environments/" + environmentId + "/users/" + user;
-    let payload = JSON.stringify({
-      username: $('#username').val(),
-      name: {
-      given: $('#fname').val(),
-      family: $('#lname').val()
-    }
-    });
-    console.log(payload);
-    console.log('ajax (' + url + ')');
-    console.log('at =' + at);
-    console.log("make ajax call");
-    $.ajax({
-        async: "true",
-        url: url,
-        method: method,
-        dataType: 'json',
-        contentType:'application/json',
-        data: payload,
-        beforeSend: function(xhr) {
-            xhr.setRequestHeader('Authorization', at);
-        }
-      })    .done(function(data) {
-            console.log(data);
-          })
-          .fail(function(data) {
-            console.log('ajax call failed');
-            console.log(data);
-            $('#warningMessage').text(data.responseJSON.details[0].message);
-            $('#warningDiv').show();
-          });
-
-          //add brief delay so info is populated
-          setTimeout(function() { getUserValues(); }, 1000);
-
-}
-
-function getAccessToken(){
+function getAccessToken() {
   console.log("getAccessToken was called");
   let url = authUrl + "/environments/" + environmentId + "/as/token";
   console.log(url);
@@ -302,88 +307,91 @@ function getAccessToken(){
   //let settings =
 
   $.ajax({
-    async: "true",
-    method: "POST",
-    url: "https://auth.pingone.com/e2431bcc-0d0b-4574-9dbc-ff8c91bb799e/as/token",
-    beforeSend: function(xhr) {
+      async: "true",
+      method: "POST",
+      url: "https://auth.pingone.com/e2431bcc-0d0b-4574-9dbc-ff8c91bb799e/as/token",
+      beforeSend: function(xhr) {
         xhr.setRequestHeader(
-            "Authorization", "Basic ZGM0M2I0M2UtMWEzZS00ZDFmLWJhY2ItMjgwZGZiNTNlODM1OjBLTWpQSTNZR1Y0Q2JCSH5WRkljLjlqTlJPR3dGQ2Y5T1Fzb216aV9iR3R4WnpraHBKeEdaeUZaOX5oRF9zNUg="
-              )},
-    headers: {
-      "Content-Type": "application/json",
-      //"Authorization": "Basic ZGM0M2I0M2UtMWEzZS00ZDFmLWJhY2ItMjgwZGZiNTNlODM1OjBLTWpQSTNZR1Y0Q2JCSH5WRkljLjlqTlJPR3dGQ2Y5T1Fzb216aV9iR3R4WnpraHBKeEdaeUZaOX5oRF9zNUg=",
-      "cache-control": "no-cache",
-      "access-control-allow-headers": "cache-control, Origin, Authorization",
-      "Access-Control-Allow-Methods": "POST, GET, OPTIONS"
-    },
-    data: {
-      "scope": "openid profile",
-      "grant_type": "client_credentials"
-    },
-    xhrFields: {
-      withCredentials: true
-    }
-  })
-  .done(function(data) {
-        console.log(data);
-      })
-      .fail(function(data) {
-        console.log('ajax call failed');
-        console.log(data);
-        $('#warningMessage').text(data.responseJSON.details[0].message);
-        $('#warningDiv').show();
-      });
+          "Authorization", "Basic ZGM0M2I0M2UtMWEzZS00ZDFmLWJhY2ItMjgwZGZiNTNlODM1OjBLTWpQSTNZR1Y0Q2JCSH5WRkljLjlqTlJPR3dGQ2Y5T1Fzb216aV9iR3R4WnpraHBKeEdaeUZaOX5oRF9zNUg="
+        )
+      },
+      headers: {
+        "Content-Type": "application/json",
+        //"Authorization": "Basic ZGM0M2I0M2UtMWEzZS00ZDFmLWJhY2ItMjgwZGZiNTNlODM1OjBLTWpQSTNZR1Y0Q2JCSH5WRkljLjlqTlJPR3dGQ2Y5T1Fzb216aV9iR3R4WnpraHBKeEdaeUZaOX5oRF9zNUg=",
+        "cache-control": "no-cache",
+        "access-control-allow-headers": "cache-control, Origin, Authorization",
+        "Access-Control-Allow-Methods": "POST, GET, OPTIONS"
+      },
+      data: {
+        "scope": "openid profile",
+        "grant_type": "client_credentials"
+      },
+      xhrFields: {
+        withCredentials: true
+      }
+    })
+    .done(function(data) {
+      console.log(data);
+    })
+    .fail(function(data) {
+      console.log('ajax call failed');
+      console.log(data);
+      $('#warningMessage').text(data.responseJSON.details[0].message);
+      $('#warningDiv').show();
+    });
 }
 
-function registerUser(){
+function registerUser() {
   console.log("registerUser was called");
-    let method = "POST";
-    let at = "Bearer " + Cookies.get("accessToken");
-    let url = apiUrl + "/environments/" + environmentId + "/users/" + user;
-    let payload = JSON.stringify({
-      company: $('#user_company').val(),
-      username: $('#user_login').val(),
-      name: {
+  let method = "POST";
+  let at = "Bearer " + Cookies.get("accessToken");
+  let url = apiUrl + "/environments/" + environmentId + "/users/" + user;
+  let payload = JSON.stringify({
+    company: $('#user_company').val(),
+    username: $('#user_login').val(),
+    name: {
       given: $('#fname').val(),
       family: $('#lname').val()
     }
+  });
+  console.log(payload);
+  console.log('ajax (' + url + ')');
+  console.log('at =' + at);
+  console.log("make ajax call");
+  $.ajax({
+      async: "true",
+      url: url,
+      method: method,
+      dataType: 'json',
+      contentType: 'application/json',
+      data: payload,
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader('Authorization', at);
+      },
+      xhrFields: {
+        withCredentials: true
+      }
+    }).done(function(data) {
+      console.log(data);
+    })
+    .fail(function(data) {
+      console.log('ajax call failed');
+      console.log(data);
+      $('#warningMessage').text(data.responseJSON.details[0].message);
+      $('#warningDiv').show();
     });
-    console.log(payload);
-    console.log('ajax (' + url + ')');
-    console.log('at =' + at);
-    console.log("make ajax call");
-    $.ajax({
-        async: "true",
-        url: url,
-        method: method,
-        dataType: 'json',
-        contentType:'application/json',
-        data: payload,
-        beforeSend: function(xhr) {
-            xhr.setRequestHeader('Authorization', at);
-        },
-        xhrFields: {
-          withCredentials: true
-        }
-      })    .done(function(data) {
-            console.log(data);
-          })
-          .fail(function(data) {
-            console.log('ajax call failed');
-            console.log(data);
-            $('#warningMessage').text(data.responseJSON.details[0].message);
-            $('#warningDiv').show();
-          });
 
-          //add brief delay so info is populated
-          setTimeout(function() { getUserValues(); }, 1000);
+  //add brief delay so info is populated
+  setTimeout(function() {
+    getUserValues();
+  }, 1000);
 }
 
 
 // exJax function makes an AJAX call
 function exJax(method, url, callback, contenttype, payload) {
   console.log('ajax (' + url + ')');
-  console.log("content type: "+contenttype);
+  console.log("content type: " + contenttype);
   $.ajax({
       url: url,
       method: method,
@@ -405,44 +413,44 @@ function exJax(method, url, callback, contenttype, payload) {
     });
 }
 
-function getAllUsers(){
-    console.log("getUserValues called");
-    let method = "GET";
-    let at = "Bearer " + Cookies.get("accessToken");
-    let url = apiUrl + "/environments/" + environmentId + "/users";
-    console.log('ajax (' + url + ')');
-    console.log('at =' +at);
-    console.log("make ajax call");
-    $.ajax({
-        async: "true",
-        url: url,
-        method: method,
-        beforeSend: function(xhr) {
-            xhr.setRequestHeader('Authorization', at);
-        }
-      }).done(function(data) {
-            console.log("data from get" +data);
-            populateTable(data);
-          })
-        .fail(function(data) {
-            console.log('ajax call failed');
-            console.log(data);
-            $('#warningMessage').text(data.responseJSON.details[0].message);
-            $('#warningDiv').show();
-          });
-    console.log("getUserValues completed")
-  }
+function getAllUsers() {
+  console.log("getUserValues called");
+  let method = "GET";
+  let at = "Bearer " + Cookies.get("accessToken");
+  let url = apiUrl + "/environments/" + environmentId + "/users";
+  console.log('ajax (' + url + ')');
+  console.log('at =' + at);
+  console.log("make ajax call");
+  $.ajax({
+      async: "true",
+      url: url,
+      method: method,
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader('Authorization', at);
+      }
+    }).done(function(data) {
+      console.log("data from get" + data);
+      populateTable(data);
+    })
+    .fail(function(data) {
+      console.log('ajax call failed');
+      console.log(data);
+      $('#warningMessage').text(data.responseJSON.details[0].message);
+      $('#warningDiv').show();
+    });
+  console.log("getUserValues completed")
+}
 
-function populateTable(json){
+function populateTable(json) {
   console.log("populateTable called");
   console.log(json);
-  let len =  Object.keys(json).length;
+  let len = Object.keys(json).length;
   let users = Object(json._embedded.users);
   //var users = JSON.parse(userslist);
   console.log(users);
   let txt = "";
-  if(len > 0){
-    for(var i=0;i<len;i++){
+  if (len > 0) {
+    for (var i = 0; i < len; i++) {
       let value = users[i];
       console.log(value);
       console.log("object above, company below");
@@ -450,8 +458,8 @@ function populateTable(json){
       value = JSON.parse(value);
       //console.log(value.company);
       console.log(Object.entries(value));
-      let values=Object.entries(value);
-      let companyarray=Object.entries(value[4]);
+      let values = Object.entries(value);
+      let companyarray = Object.entries(value[4]);
       //txt += "<tr><td>"+value.company+"</td><td>"+value.name.family+"</td><td>"+value.name.given+"</td><td>"+users[i].email+"</td><td>"+value.email+"</td><td>"+value.primaryPhone+"</td></tr>";
     }
   }
