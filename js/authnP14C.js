@@ -1,12 +1,12 @@
 // variable definitions and building authorization url
 type="text/javascript";
-const environmentId = '7334523a-4a2d-4dd6-9f37-93c60114e938'; // available on settings page of p14c admin console
+const environmentId = 'e2431bcc-0d0b-4574-9dbc-ff8c91bb799e'; // available on settings page of p14c admin console
 const baseUrl = 'https://morganapps.ping-eng.com/'; // URL of where you will host this application
 const scopes = 'openid profile email address phone'; // default scopes to request
 const responseType = 'token id_token'; //tokens to recieve
 
-const authClientId = '77838143-24eb-4223-9eeb-8559baa52c5a';
-const authClientSecret = 'w7TxHDpxX2hECtHc4g9bh~M_GwcNMMLF4VmQOUFc0LAS1JQ.PN86mUdmzjpk2KCY';
+const clientId = '77838143-24eb-4223-9eeb-8559baa52c5a';
+const clientSecret = 'w7TxHDpxX2hECtHc4g9bh~M_GwcNMMLF4VmQOUFc0LAS1JQ.PN86mUdmzjpk2KCY';
 const adminRedirectUri =baseUrl + 'myP14CDemo/content/finance/admin-login.html'
 
 const cookieDomain = ''; // unnecessary unless using subdomains (e.g., login.example.com, help.example.com, docs.example.com).  Then use a common root (e.g., .example.com)
@@ -19,6 +19,7 @@ const apiUrl = 'https://api.pingone.com/v1';
 
 const userAuthScopes = 'p1:read:self:user';
 
+const flowId = getUrlParameter('flowId');
 
 const regexLower = new RegExp('(?=.*[a-z])');
 const regexUpper = new RegExp('(?=.*[A-Z])');
