@@ -19,7 +19,6 @@ const apiUrl = 'https://api.pingone.com/v1';
 
 const userAuthScopes = 'p1:read:self:user';
 
-const flowId = getUrlParameter('flowId');
 
 const regexLower = new RegExp('(?=.*[a-z])');
 const regexUpper = new RegExp('(?=.*[A-Z])');
