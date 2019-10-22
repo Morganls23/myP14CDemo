@@ -1,6 +1,6 @@
 // variable definitions and building authorization url
 type="text/javascript";
-let environmentId = 'e2431bcc-0d0b-4574-9dbc-ff8c91bb799e'; // available on settings page of p14c admin console
+const authEnvironmentId = 'e2431bcc-0d0b-4574-9dbc-ff8c91bb799e'; // available on settings page of p14c admin console
 const baseUrl = 'https://morganapps.ping-eng.com/'; // URL of where you will host this application
 const scopes = 'openid profile email address phone'; // default scopes to request
 const responseType = 'token id_token'; //tokens to recieve
@@ -41,9 +41,9 @@ function generateNonce(length) {
 
 
 
-if (!clientId || !environmentId) {
+if (!clientId || !authEnvironmentId) {
 
-  alert('Be sure to edit js/auth.js with your environmentId and clientId');
+  alert('Be sure to edit js/auth.js with your authEnvironmentId and clientId');
 
 }
 
@@ -97,7 +97,7 @@ function validatePassword() {
   });
   console.log('payload is ' + payload)
   let url = $('#validatePasswordUrl').val();
-  //let url = (authUrl + environmentId + '/flows/' + flowId);
+  //let url = (authUrl + authauthEnvironmentId + '/flows/' + flowId);
   console.log('url is: ' + url);
   let contenttype = 'application/vnd.pingidentity.usernamePassword.check+json';
   console.log('contenttype is ' + contenttype);
