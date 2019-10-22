@@ -1,6 +1,6 @@
 // variable definitions and building authorization url
 type = 'text/javascript';
-const environmentId = '7334523a-4a2d-4dd6-9f37-93c60114e938'; // available on settings page of p14c admin console
+let environmentId = '7334523a-4a2d-4dd6-9f37-93c60114e938'; // available on settings page of p14c admin console
 const baseUrl = 'https://morganapps.ping-eng.com/'; // URL of where you will host this application
 
 const scopes = 'openid profile email address phone p1:update:user p1:read:user'; // default scopes to request
