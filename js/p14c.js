@@ -130,43 +130,42 @@ $('#changePassword').on('input', function(e) {
 });
 
 // getUrlParameter function parses out the querystring to fetch specific value (e.g., flowId)
-function getUrlParameter(parameterName) {
+function getUrlParameter (parameterName) {
   console.log('getUrlParameter was called');
   let pageUrl = window.location.href;
-  let pound = "#";
-  let q = "?";
-  let simpleUrl = pageUrl.substring(0, pageUrl.indexOf(pound));
-  console.log("simple url: " + simpleUrl);
+  const pound = '#';
+  const q = '?';
+  const simpleUrl = pageUrl.substring(0, pageUrl.indexOf(pound));
+  console.log('simple url: ' + simpleUrl);
   console.log('pageUrl: ' + pageUrl);
   if (pageUrl.includes(pound)) {
-    console.log("pageUrl is not null and has #");
+    console.log('pageUrl is not null and has #');
     pageUrl = pageUrl.substring(pageUrl.indexOf(pound) + 1);
-    console.log("removed base at #:" + pageUrl);
-    let urlVariables = pageUrl.split('&');
+    console.log('removed base at #:' + pageUrl);
+    const urlVariables = pageUrl.split('&');
 
-    console.log("urlVariables: " + urlVariables);
+    console.log('urlVariables: ' + urlVariables);
     for (let i = 0; i < urlVariables.length; i++) {
-      let thisParameterName = urlVariables[i].split('=');
-      if (thisParameterName[0] == parameterName) {
-        console.log("parameterName:" + thisParameterName[1]);
+      const thisParameterName = urlVariables[i].split('=');
+      if (thisParameterName[0] === parameterName) {
+        console.log('parameterName:' + thisParameterName[1]);
         return thisParameterName[1];
       }
-      if (thisParameterName[0].includes("access_token")) {
-        console.log("setting at cookie : " + thisParameterName[1]);
+      if (thisParameterName[0].includes('access_token')) {
+        console.log('setting at cookie : ' + thisParameterName[1]);
         Cookies.set('accessToken', thisParameterName[1]);
       }
-      if (thisParameterName[0].includes("id_token")) {
-        console.log("setting id cookie : " + thisParameterName[1]);
-        let idToken = thisParameterName[1];
+      if (thisParameterName[0].includes('id_token')) {
+        console.log('setting id cookie : ' + thisParameterName[1]);
+        const idToken = thisParameterName[1];
         Cookies.set('idToken', idToken);
         setUserinfoCookie();
       }
 
       console.log(thisParameterName);
-      console.log("remove AT and IDT from URL");
+      console.log('remove AT and IDT from URL');
       window.location.replace(simpleUrl);
     }
-
   } else if (pageUrl.includes(q)) {
     console.log("pageUrl is not null");
     pageUrl = pageUrl.substring(pageUrl.indexOf(q));
@@ -471,7 +470,7 @@ function getSubscriptions (userData) {  //will need ot use getUserValues() to ge
   var table = document.createElement('table');
   let tr = table.instertRow(-1);
   for (var i = 0; i < mySubs.length; i++){
-    
+
   }
 }
 
