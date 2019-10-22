@@ -441,56 +441,32 @@ function getAllUsers() {
   console.log("getUserValues completed")
 }
 
-function populateTable(json) {
-  console.log("populateTable called");
+function populateTable (json) {
+  console.log('populateTable called');
   console.log(json);
-  let len = Object.keys(json).length;
-  let users = Object(json._embedded.users);
-  //var users = JSON.parse(userslist);
+  const len = Object.keys(json).length;
+  const users = Object(json._embedded.users);
+  // var users = JSON.parse(userslist);
   console.log(users);
-  let txt = "";
   if (len > 0) {
     for (var i = 0; i < len; i++) {
       let value = users[i];
       console.log(value);
-      console.log("object above, company below");
+      console.log('object above, company below');
       value = JSON.stringify(value);
       value = JSON.parse(value);
-      //console.log(value.company);
+      // console.log(value.company);
       console.log(Object.entries(value));
-      let values = Object.entries(value);
-      let companyarray = Object.entries(value[4]);
-      //txt += "<tr><td>"+value.company+"</td><td>"+value.name.family+"</td><td>"+value.name.given+"</td><td>"+users[i].email+"</td><td>"+value.email+"</td><td>"+value.primaryPhone+"</td></tr>";
+      // let values = Object.entries(value);
+      // let companyarray = Object.entries(value[4]);
+      // txt += "<tr><td>"+value.company+"</td><td>"+value.name.family+"</td><td>"+value.name.given+"</td><td>"+users[i].email+"</td><td>"+value.email+"</td><td>"+value.primaryPhone+"</td></tr>";
     }
   }
-  /*if(txt != ""){
-                $("#table").append(txt).removeClass("hidden");
-    }
-    */
 }
 
-
-// change password function
-function changePassword() {
-  console.log('changePassword called');
-  let payload = JSON.stringify({
-    currentPassword: $('#password').val(),
-    newPassword: $('#changePassword').val()
-  });
-  let url = $('#changePasswordUrl').val();
-  let contenttype = $('#changePasswordContentType').val();
-  exJax('POST', url, nextStep, contenttype, payload);
-}
-
-// validate one time passcode function
-function validateOtp() {
-  console.log('validateOtp called');
-  let payload = JSON.stringify({
-    otp: $('#otp').val()
-  });
-  let url = $('#validateOtpUrl').val();
-  let contenttype = $('#validateOtpContentType').val();
-  exJax('POST', url, nextStep, contenttype, payload);
+function getSubscriptions (userData){ //will need ot use getUserValues() to get info to function
+  console.log(userdata);
+  userJson.name.given
 }
 
 function nextStep(data) {
