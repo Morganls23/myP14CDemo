@@ -464,9 +464,15 @@ function populateTable (json) {
   }
 }
 
-function getSubscriptions (userData){ //will need ot use getUserValues() to get info to function
-  console.log(userdata);
-  userJson.name.given
+function getSubscriptions (userData) {  //will need ot use getUserValues() to get info to function
+  console.log(userData);
+  let mySubs = userData.subscriptions;
+  console.log(mySubs);
+  var table = document.createElement('table');
+  let tr = table.instertRow(-1);
+  for (var i = 0; i < mySubs.length; i++){
+    
+  }
 }
 
 function nextStep(data) {

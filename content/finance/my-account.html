@@ -287,17 +287,18 @@
         });
 
 
-        $(document).ready(function () {
-          console.log("Page ready function my-account");
-          if(Cookies.get("accessToken")){
-            setUserinfoCookie();
-            getUserValues();
-          }
-          else {
-            window.location.href=authorizationUrl;
-          }
-        }
-      )
+$(document).ready(function () {
+  console.log('Page ready function my-account');
+  if (Cookies.get('accessToken')) {
+    setUserinfoCookie();
+    getUserValues();
+    getSubscriptions();
+  }
+  else {
+    window.location.href=authorizationUrl;
+  }
+}
+  )
 
     </script>
 </body>
