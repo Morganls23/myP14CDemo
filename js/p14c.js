@@ -1,6 +1,6 @@
 // variable definitions and building authorization url
 type = 'text/javascript';
-let environmentId = '7334523a-4a2d-4dd6-9f37-93c60114e938'; // available on settings page of p14c admin console
+const environmentId = '7334523a-4a2d-4dd6-9f37-93c60114e938'; // available on settings page of p14c admin console
 const baseUrl = 'https://morganapps.ping-eng.com/'; // URL of where you will host this application
 
 const scopes = 'openid profile email address phone p1:update:user p1:read:user'; // default scopes to request
@@ -23,6 +23,154 @@ const regexUpper = new RegExp('(?=.*[A-Z])');
 const regexNumeric = new RegExp('(?=.*[0-9])');
 const regexSpecial = new RegExp('(?=.*[~!@#\$%\^&\*\)\(\|\;\:\,\.\?\_\-])');
 const regexLength = new RegExp('(?=.{8,})');
+
+
+// Authentitcaiton
+const authClientId = '77838143-24eb-4223-9eeb-8559baa52c5a';
+const authClientSecret = 'w7TxHDpxX2hECtHc4g9bh~M_GwcNMMLF4VmQOUFc0LAS1JQ.PN86mUdmzjpk2KCY';
+const adminRedirectUri =baseUrl + 'myP14CDemo/content/finance/admin-login.html';
+const userAuthScopes = 'p1:read:self:user';
+
+function generateNonce(length) {
+  var result = '';
+  var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789:;_-.()!';
+  var charactersLength = characters.length;
+  for (var i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+}
+
+
+
+if (!clientId || !authEnvironmentId) {
+
+  alert('Be sure to edit js/auth.js with your authEnvironmentId and clientId');
+
+}
+
+
+// exJax function makes an AJAX call
+function exJax(method, url, callback, contenttype, payload) {
+  console.log('ajax (' + url + ')');
+  console.log("content type: "+contenttype);
+  $.ajax({
+      url: url,
+      method: method,
+      dataType: 'json',
+      contentType: contenttype,
+      data: payload,
+      xhrFields: {
+        withCredentials: true
+      }
+    })
+    .done(function(data) {
+      callback(data);
+    })
+    .fail(function(data) {
+      console.log('ajax call failed');
+      console.log(data);
+      $('#warningMessage').text(data.responseJSON.details[0].message);
+      $('#warningDiv').show();
+    });
+}
+
+
+
+
+// change password function
+function changePassword() {
+  console.log('changePassword called');
+  let payload = JSON.stringify({
+    currentPassword: $('#password').val(),
+    newPassword: $('#changePassword').val()
+  });
+  let url = $('#changePasswordUrl').val();
+  let contenttype = $('#changePasswordContentType').val();
+  exJax('POST', url, nextStep, contenttype, payload);
+}
+
+// validate password function
+function validatePassword() {
+  console.log('validatePassword called');
+  let payload = JSON.stringify({
+    username: $('#user_login').val(),
+    password: $('#user_pass').val()
+  });
+  console.log('payload is ' + payload)
+  let url = $('#validatePasswordUrl').val();
+  //let url = (authUrl + authauthEnvironmentId + '/flows/' + flowId);
+  console.log('url is: ' + url);
+  let contenttype = 'application/vnd.pingidentity.usernamePassword.check+json';
+  console.log('contenttype is ' + contenttype);
+  exJax('POST', url, nextStep, contenttype, payload);
+}
+
+// validate one time passcode function
+function validateOtp() {
+  console.log('validateOtp called');
+  let payload = JSON.stringify({
+    otp: $('#otp').val()
+  });
+  let url = $('#validateOtpUrl').val();
+  let contenttype = $('#validateOtpContentType').val();
+  exJax('POST', url, nextStep, contenttype, payload);
+}
+
+function nextStep(data) {
+  status = data.status;
+  console.log('Parsing json to determine next step: ' + status);
+
+  switch (status) {
+    case 'USERNAME_PASSWORD_REQUIRED':
+      console.log('Rendering login form');
+      $('#loginDiv').show();
+      $('#otpDiv').hide();
+      $('#validatePasswordUrl').val(data._links['usernamePassword.check'].href);
+      $('#validatePasswordContentType').val('application/vnd.pingidentity.usernamePassword.check+json');
+      break;
+    case 'PASSWORD_REQUIRED':
+      console.log('Rendering login form');
+      $('#loginDiv').show();
+      $('#otpDiv').hide();
+      $('#validatePasswordUrl').val(data._embedded.requiredStep._links['usernamePassword.check'].href);
+      $('#validatePasswordContentType').val('application/vnd.pingidentity.usernamePassword.check+json');
+      break;
+    case 'OTP_REQUIRED':
+      console.log('Rendering otp form');
+      $('#loginDiv').hide();
+      $('#otpDiv').show();
+      $('#validateOtpUrl').val(data._links['otp.check'].href);
+      $('#validateOtpContentType').val('application/vnd.pingidentity.otp.check+json')
+      break;
+    case 'MUST_CHANGE_PASSWORD':
+      console.log('Rendering password form');
+      $('#loginDiv').hide();
+      $('#passwordDiv').show();
+      $('#changePasswordUrl').val(data._links['password.reset'].href);
+      $('#changePasswordContentType').val('application/vnd.pingidentity.password.reset+json')
+      break;
+    case 'COMPLETED':
+      console.log('completed authentication successfully');
+      $('#warningMessage').text('');
+      $('#warningDiv').hide();
+      console.log('Redirecting user');
+      console.log(data);
+      window.location.replace(data.resumeUrl);
+      break;
+    default:
+      console.log('Unexpected outcome');
+      break;
+  }
+}
+
+
+
+
+
+
+// Other Stuff
+
 
 // build the authorization url in case we need it
 
@@ -471,52 +619,5 @@ function getSubscriptions (userData) {  //will need ot use getUserValues() to ge
   let tr = table.instertRow(-1);
   for (var i = 0; i < mySubs.length; i++){
 
-  }
-}
-
-function nextStep(data) {
-  status = data.status;
-  console.log('Parsing json to determine next step: ' + status);
-
-  switch (status) {
-    case 'USERNAME_PASSWORD_REQUIRED':
-      console.log('Rendering login form');
-      $('#loginDiv').show();
-      $('#otpDiv').hide();
-      $('#validatePasswordUrl').val(data._links['usernamePassword.check'].href);
-      $('#validatePasswordContentType').val('application/vnd.pingidentity.usernamePassword.check+json');
-      break;
-    case 'PASSWORD_REQUIRED':
-      console.log('Rendering login form');
-      $('#loginDiv').show();
-      $('#otpDiv').hide();
-      $('#validatePasswordUrl').val(data._embedded.requiredStep._links['usernamePassword.check'].href);
-      $('#validatePasswordContentType').val('application/vnd.pingidentity.usernamePassword.check+json');
-      break;
-    case 'OTP_REQUIRED':
-      console.log('Rendering otp form');
-      $('#loginDiv').hide();
-      $('#otpDiv').show();
-      $('#validateOtpUrl').val(data._links['otp.check'].href);
-      $('#validateOtpContentType').val('application/vnd.pingidentity.otp.check+json')
-      break;
-    case 'MUST_CHANGE_PASSWORD':
-      console.log('Rendering password form');
-      $('#loginDiv').hide();
-      $('#passwordDiv').show();
-      $('#changePasswordUrl').val(data._links['password.reset'].href);
-      $('#changePasswordContentType').val('application/vnd.pingidentity.password.reset+json')
-      break;
-    case 'COMPLETED':
-      console.log('completed authentication successfully');
-      $('#warningMessage').text('');
-      $('#warningDiv').hide();
-      console.log('Redirecting user');
-      console.log(data);
-      window.location.replace(data.resumeUrl);
-      break;
-    default:
-      console.log('Unexpected outcome');
-      break;
   }
 }
