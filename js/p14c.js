@@ -42,9 +42,9 @@ function generateNonce(length) {
 
 
 
-if (!clientId || !authEnvironmentId) {
+if (!clientId || !environmentId) {
 
-  alert('Be sure to edit js/auth.js with your authEnvironmentId and clientId');
+  alert('Be sure to edit js/auth.js with your environmentId and clientId');
 
 }
 
@@ -98,7 +98,7 @@ function validatePassword() {
   });
   console.log('payload is ' + payload)
   let url = $('#validatePasswordUrl').val();
-  //let url = (authUrl + authauthEnvironmentId + '/flows/' + flowId);
+  //let url = (authUrl + environmentId + '/flows/' + flowId);
   console.log('url is: ' + url);
   let contenttype = 'application/vnd.pingidentity.usernamePassword.check+json';
   console.log('contenttype is ' + contenttype);
