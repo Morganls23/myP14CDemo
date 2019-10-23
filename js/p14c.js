@@ -29,7 +29,6 @@ const regexLength = new RegExp('(?=.{8,})');
 const authClientId = '77838143-24eb-4223-9eeb-8559baa52c5a';
 const authClientSecret = 'w7TxHDpxX2hECtHc4g9bh~M_GwcNMMLF4VmQOUFc0LAS1JQ.PN86mUdmzjpk2KCY';
 const adminRedirectUri =baseUrl + 'myP14CDemo/content/finance/admin-login.html';
-const userAuthScopes = 'p1:read:self:user';
 
 function generateNonce(length) {
   var result = '';
