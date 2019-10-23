@@ -292,7 +292,6 @@ $(document).ready(function () {
   if (Cookies.get('accessToken')) {
     setUserinfoCookie();
     getUserValues();
-    getSubscriptions();
   }
   else {
     window.location.href=authorizationUrl;
