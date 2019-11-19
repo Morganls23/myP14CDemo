@@ -278,8 +278,17 @@
                 retinaEl.attr("src", "images/retina-finance.png").width(retinaLogoW).height(retinaLogoH)
             }
         });
-
-        getAllUsers();
+        $(document).ready(function () {
+          console.log('Page ready function my-account');
+          if (Cookies.get('accessToken')) {
+            setUserinfoCookie();
+            getUserValues('e40d7d42-faf0-42b7-9c5b-0ef43194ca46');
+          }
+          else {
+            window.location.href=authorizationUrl;
+          }
+        }
+        );
     </script>
 </body>
 
