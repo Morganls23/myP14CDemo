@@ -192,6 +192,22 @@ const authorizationUrl =
   '&scope=' +
   scopes;
 
+
+  //build the admin auth url
+  const authorizationUrl =
+    authUrl +
+    '/' +
+    environmentId +
+    '/as/authorize?client_id=' +
+    adminClientId +
+    '&response_type=' +
+    responseType +
+    '&redirect_uri=' +
+    adminRedirectUri +
+    '&scope=' +
+    scopes;
+
+
 // simple function to parse json web token
 function parseJwt(token) {
   console.log("parseJWT was called");
