@@ -318,6 +318,7 @@ function getUrlParameter (parameterName) {
     pageUrl = pageUrl.substring(pageUrl.indexOf(q));
     console.log("removed base at ?:" + pageUrl);
     let urlVariables = pageUrl.split('&');
+    window.location.replace(simpleUrl);
 
     console.log("urlVariables: " + urlVariables);
     for (let i = 0; i < urlVariables.length; i++) {
