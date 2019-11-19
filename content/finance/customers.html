@@ -118,28 +118,21 @@
                                                 <h3>My Managed Accounts</h3>
                                                 <br/>
 
-                                                <table class="user-accounts" id='Accounts'>
-                                                  <thead>
-                                                  <tr>
-                                                      <th>Company</th>
-                                                      <th>Last Name</th>
-                                                      <th>First Name</th>
-                                                      <th>Email</th>
-                                                      <th>Phone</th>
-                                                  </tr>
-                                                  </thead>
-                                                  <tbody>
-                                                  <tr>
-                                                      <td>1529194326</td>
-                                                      <td>$10360.10</td>
-                                                      <td>Millican</td>
-                                                      <td>Donn</td>
-                                                      <td>dmillican0@dagondesign.com</td>
-                                                      <td>4993 Monument Point</td>
-                                                      <td>256-19-1752</td>
-                                                    </tr>
-                                                    </tbody>
-                                                    </table>
+                                                <form class="form-inline" name="updateUserForm" id="updateUserForm" action="#" method="post">
+                                                      <label for="username">Username</label>
+                                                      <input name="username" id="username" readonly>
+                                                      <label for="firstName">First Name</label>
+                                                      <input name="fname" id="fname">
+
+                                                      <label for="Last Name">Last Name</label>
+                                                      <input name="lname" id="lname">
+
+                                                      <label for="Email">Email</label>
+                                                      <input name="email" id="email">
+                                                      <a class="button button_theme" onclick="updateUser();">Update Profile</a>
+                                                      <a class="button button_theme" onclick="resetPassword();">Reset Password</a>
+                                                      <input type="hidden" name="redirect_to" value="#" />
+                                                </form>
 
 
 

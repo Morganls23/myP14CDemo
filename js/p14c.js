@@ -382,10 +382,15 @@ function setUserValues(userJson) {
   //let idPayload = parseJwt(idToken);
 }
 
-function getUserValues() {
+
+function resetPassword(){
+
+}
+
+function getUserValues(userID) {
   console.log('getUserValues called');
   let method = "GET";
-  let user = Cookies.get("uuid");
+  let user = userID;
   let at = "Bearer " + Cookies.get("accessToken");
   let url = apiUrl + "/environments/" + environmentId + "/users/" + user;
   console.log('ajax (' + url + ')');

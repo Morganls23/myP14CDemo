@@ -291,7 +291,7 @@ $(document).ready(function () {
   console.log('Page ready function my-account');
   if (Cookies.get('accessToken')) {
     setUserinfoCookie();
-    getUserValues();
+    getUserValues(Cookies.get('uuid'));
   }
   else {
     window.location.href=authorizationUrl;
