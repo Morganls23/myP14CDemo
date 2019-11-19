@@ -282,7 +282,7 @@ function getUrlParameter (parameterName) {
   let pageUrl = window.location.href;
   const pound = '#';
   const q = '?';
-  const simpleUrl = pageUrl.substring(0, pageUrl.indexOf(pound));
+  const simpleUrl = pageUrl.substring(0, pageUrl.indexOf(q));
   console.log('simple url: ' + simpleUrl);
   console.log('pageUrl: ' + pageUrl);
   if (pageUrl.includes(pound)) {
