@@ -194,7 +194,7 @@ const authorizationUrl =
 
 
   //build the admin auth url
-  const authorizationUrl =
+  const adminAuthorizationUrl =
     authUrl +
     '/' +
     environmentId +
