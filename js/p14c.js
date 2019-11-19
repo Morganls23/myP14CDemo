@@ -31,11 +31,10 @@ const workerClientSecret='W5PdV0UP_p-a0FfHOvrgUfs88VzERThYPZs1-.6HC0_VQ4IWS4UX1X
 
 
 // Authentitcaiton
-const adminClientId = 'af9000a5-b6db-444c-837d-e76e90a69343';
-const adminClientSecret = '~732i0cV5V9FRstjNLh2aNMqmA19.d-l9up-RoOkOEZip49KYFBa5bErlWTuPTRf';
+const adminClientId = 'd915beea-7682-4441-b7ed-92fef5b3b9bb';
+const adminClientSecret = 'DdkqZjXBqnpQ_0hy19cX8bKRvv_ZSOxIKk.byHqEAf2cSlOE7XoOLEU63euEjnx.';
 const adminRedirectUri =baseUrl + 'myP14CDemo/content/finance/admin-login.html';
-const adminScopes = 'p1:update:user p1:update:device p1:read:userPassword p1:delete:pairingKey p1:reset:userPassword p1:create:device p1:read:pairingKey p1:read:userLinkedAccounts p1:validate:userPassword p1:delete:userLinkedAccounts p1:create:pairingKey p1:delete:device p1:read:user p1:update:userMfaEnabled p1:read:device profile address phone email';
-
+const adminScopes = 'profile address phone email openid';
 
 
 function generateNonce(length) {
