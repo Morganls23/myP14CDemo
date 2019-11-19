@@ -31,8 +31,8 @@ const workerClientSecret='W5PdV0UP_p-a0FfHOvrgUfs88VzERThYPZs1-.6HC0_VQ4IWS4UX1X
 
 
 // Authentitcaiton
-const adminClientId = '77838143-24eb-4223-9eeb-8559baa52c5a';
-const adminClientSecret = 'w7TxHDpxX2hECtHc4g9bh~M_GwcNMMLF4VmQOUFc0LAS1JQ.PN86mUdmzjpk2KCY';
+const adminClientId = 'af9000a5-b6db-444c-837d-e76e90a69343';
+const adminClientSecret = '~732i0cV5V9FRstjNLh2aNMqmA19.d-l9up-RoOkOEZip49KYFBa5bErlWTuPTRf';
 const adminRedirectUri =baseUrl + 'myP14CDemo/content/finance/admin-login.html';
 
 
