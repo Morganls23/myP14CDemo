@@ -452,7 +452,7 @@ function getAccessToken() {
   console.log("getAccessToken was called");
   let url = authUrl + "/environments/" + environmentId + "/as/token";
   console.log(url);
-  let tok = workerClientId + ':' + workerClientSecret;
+  let tok = clientId + ':' + clientSecret;
   let hash = btoa(tok);
   let auth = "Basic " + hash;
   console.log(auth);
