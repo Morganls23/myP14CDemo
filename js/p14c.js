@@ -424,6 +424,7 @@ function adminChangePassword(){
   //  newPassword: "test123"
   //});
   let payload = document.getElementById('password').value;
+  console.log(payload);
   console.log('ajax (' + url + ')');
   console.log('at =' + at);
   console.log("make ajax call");
