@@ -431,7 +431,7 @@ function adminChangePassword(){
       url: url,
       method: method,
       data:payload,
-      contentType: 'application/vnd.pingidentity.password.sendRecoveryCode+json',
+      contentType: 'application/vnd.pingidentity.password.reset+json',
       beforeSend: function(xhr) {
         xhr.setRequestHeader('Authorization', at);
       }
