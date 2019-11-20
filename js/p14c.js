@@ -414,11 +414,12 @@ function resetPassword(userID){
 }
 
 function adminGetUser(userName){
+  //{{apiPath}}/environments/{{envID}}/users/?filter=username%20eq%20%22lsmith%22
   console.log('adminGetUser called');
   let method = "GET";
   let user = userName;
   let at = "Bearer " + Cookies.get("accessToken");
-  let url = apiUrl + "/environments/" + environmentId + "/users/?filter=username%20eq%20%22" + userName + "%22";
+  let url = apiUrl + "/environments/" + environmentId + "/users/?filter=username%20eq%20%22" + username + "%22";
   console.log('ajax (' + url + ')');
   console.log('at =' + at);
   console.log("make ajax call");
@@ -440,7 +441,6 @@ function adminGetUser(userName){
 function getUserAPI(json){
 
   return userJson.given
-
 }
 
 function getUserValues(userID) {
