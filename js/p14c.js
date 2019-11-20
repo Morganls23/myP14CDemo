@@ -413,6 +413,41 @@ function resetPassword(){
     console.log("resetPassword finished");
 }
 
+
+function adminChangePassword(){
+  console.log("resetPassword was called");
+  let method = "POST";
+  let user = Cookies.get("currentUser");
+  let at = "Bearer " + Cookies.get("accessToken");
+  let url = apiUrl + "/environments/" + environmentId + "/users/" + user + '/password';
+  let payload = JSON.stringify({
+    newPassword: "test123"
+  });
+  console.log('ajax (' + url + ')');
+  console.log('at =' + at);
+  console.log("make ajax call");
+  $.ajax({
+      async: "true",
+      url: url,
+      method: method,
+      data:payload,
+      contentType: 'application/vnd.pingidentity.password.sendRecoveryCode+json',
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader('Authorization', at);
+      }
+    }).done(function(data) {
+      console.log(data);
+    })
+    .fail(function(data) {
+      console.log('ajax call failed');
+      console.log(data);
+      $('#warningMessage').text(data.responseJSON.details[0].message);
+      $('#warningDiv').show();
+    });
+    console.log("resetPassword finished");
+
+}
+
 function adminGetUser(){
   //{{apiPath}}/environments/{{envID}}/users/?filter=username%20eq%20%22lsmith%22
   console.log('adminGetUser called');
