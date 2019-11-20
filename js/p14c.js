@@ -368,7 +368,7 @@ function setUserValues(userJson) {
   let uuid = Cookies.get('uuid');
   //let streetAddress = userJson.address.streetAddress + " " + userJson.address.locality + ", " + userJson.address.region + " " + userJson.address.postalCode;
   if (Cookies.get("accessToken")) {
-    document.getElementById("user").value = 'Hello ' + userJson._embedded.users[0] + "!";
+    document.getElementById("user").value = 'Hello ' + userJson.name.given + "!";
     document.getElementById("fname").value = userJson.name.given;
     document.getElementById("lname").value = userJson.name.family;
     document.getElementById("email").value = userJson.email;
@@ -436,12 +436,24 @@ function adminGetUser(){
     setUserValues(response);
   });
   console.log("adminGetUser completed")
-
 }
 
-function getUserAPI(json){
+function adminSetUserValues(userJson) {
+  console.log("adminsetuserValues was called");
+  console.log(userJson);
+  let uuid = Cookies.get('uuid');
+  if (Cookies.get("accessToken")) {
+    document.getElementById("user").value = 'Hello ' + userJson._embedded.users[0].username + "!";
+    document.getElementById("fname").value = userJson._embedded.users[0].name.given;
+    document.getElementById("lname").value = userJson._embedded.users[0].name.family;
+    document.getElementById("email").value = userJson._embedded.users[0].email;
+    document.getElementById("username").value = userJson._embedded.users[0].username;
+    //document.getElementById("address").innerHTML=streetAddress;
+  } else {
+    document.getElementById("username").innerHTML = 'Welcome Guest';
+  }
 
-  return userJson.given
+  //let idPayload = parseJwt(idToken);
 }
 
 function getUserValues(userID) {
