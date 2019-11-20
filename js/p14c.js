@@ -492,10 +492,10 @@ function adminSetUserValues(userJson) {
   //let idPayload = parseJwt(idToken);
 }
 
-function getUserValues(userID) {
+function getUserValues() {
   console.log('getUserValues called');
   let method = "GET";
-  let user = userID;
+  let user = Cookies.get("uuid");
   let at = "Bearer " + Cookies.get("accessToken");
   let url = apiUrl + "/environments/" + environmentId + "/users/" + user;
   console.log('ajax (' + url + ')');
