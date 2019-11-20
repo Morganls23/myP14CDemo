@@ -382,8 +382,37 @@ function setUserValues(userJson) {
 }
 
 
-function resetPassword(){
+function resetPassword(userID){
 
+  //https://api.pingone.com/v1/environments/7334523a-4a2d-4dd6-9f37-93c60114e938/users/bfd0e265-abe6-41c9-aca6-2352478b30da/password
+  console.log("resetPassword was called");
+  let method = "POST";
+  let user = userID;
+  let at = "Bearer " + Cookies.get("accessToken");
+  let url = apiUrl + "/environments/" + environmentId + "/users/" + user + 'password';
+  });
+  console.log('ajax (' + url + ')');
+  console.log('at =' + at);
+  console.log("make ajax call");
+  $.ajax({
+      async: "true",
+      url: url,
+      method: method,
+      dataType: 'json',
+      contentType: 'application/json',
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader('Authorization', at);
+      }
+    }).done(function(data) {
+      console.log(data);
+    })
+    .fail(function(data) {
+      console.log('ajax call failed');
+      console.log(data);
+      $('#warningMessage').text(data.responseJSON.details[0].message);
+      $('#warningDiv').show();
+    });
+    console.log("resetPassword finished");
 }
 
 function getUserValues(userID) {
