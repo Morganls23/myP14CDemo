@@ -416,7 +416,7 @@ function resetPassword(){
 
 function adminChangePassword(){
   console.log("adminChangePassword was called");
-  let method = "POST";
+  let method = "PUT";
   let user = Cookies.get("currentUser");
   let at = "Bearer " + Cookies.get("accessToken");
   let url = apiUrl + "/environments/" + environmentId + "/users/" + user + '/password';
