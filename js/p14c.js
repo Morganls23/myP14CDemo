@@ -389,7 +389,7 @@ function resetPassword(){
   let method = "POST";
   let user = Cookies.get("currentUser");
   let at = "Bearer " + Cookies.get("accessToken");
-  let url = apiUrl + "/environments/" + environmentId + "/users/" + user + 'password';
+  let url = apiUrl + "/environments/" + environmentId + "/users/" + user + '/password';
   console.log('ajax (' + url + ')');
   console.log('at =' + at);
   console.log("make ajax call");
