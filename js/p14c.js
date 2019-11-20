@@ -415,7 +415,7 @@ function resetPassword(){
 
 
 function adminChangePassword(){
-  console.log("resetPassword was called");
+  console.log("adminChangePassword was called");
   let method = "POST";
   let user = Cookies.get("currentUser");
   let at = "Bearer " + Cookies.get("accessToken");
@@ -444,7 +444,7 @@ function adminChangePassword(){
       $('#warningMessage').text(data.responseJSON.details[0].message);
       $('#warningDiv').show();
     });
-    console.log("resetPassword finished");
+    console.log("AdminchangePassword finished");
 
 }
 
