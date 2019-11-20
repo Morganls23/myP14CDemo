@@ -420,7 +420,7 @@ function adminGetUser(){
   let user = document.getElementById('username').value;
   console.log(user);
   let at = "Bearer " + Cookies.get("accessToken");
-  let url = apiUrl + "/environments/" + environmentId + "/users/?filter=username%20eq%20%22" + username + "%22";
+  let url = apiUrl + "/environments/" + environmentId + "/users/?filter=username%20eq%20%22" + user + "%22";
   console.log('ajax (' + url + ')');
   console.log('at =' + at);
   console.log("make ajax call");
