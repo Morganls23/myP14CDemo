@@ -420,9 +420,10 @@ function adminChangePassword(){
   let user = Cookies.get("currentUser");
   let at = "Bearer " + Cookies.get("accessToken");
   let url = apiUrl + "/environments/" + environmentId + "/users/" + user + '/password';
-  let payload = JSON.stringify({
-    newPassword: "test123"
-  });
+  //let payload = JSON.stringify({
+  //  newPassword: "test123"
+  //});
+  let payload = document.getElementById('password').value;
   console.log('ajax (' + url + ')');
   console.log('at =' + at);
   console.log("make ajax call");
