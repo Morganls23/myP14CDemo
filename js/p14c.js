@@ -441,6 +441,7 @@ function adminGetUser(){
 function adminSetUserValues(userJson) {
   console.log("adminsetuserValues was called");
   console.log(userJson);
+  console.log(userJson._embedded.users[0].id);
   Cookies.set('currentUser', userJson._embedded.users[0].id);
   if (Cookies.get("accessToken")) {
     document.getElementById("user").value = 'Hello ' + userJson._embedded.users[0].username + "!";
