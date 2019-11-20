@@ -433,7 +433,7 @@ function adminGetUser(){
     }
   }).done(function(response) {
     console.log(response);
-    setUserValues(response);
+    adminSetUserValues(response);
   });
   console.log("adminGetUser completed")
 }
