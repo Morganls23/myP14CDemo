@@ -413,6 +413,36 @@ function resetPassword(userID){
     console.log("resetPassword finished");
 }
 
+function adminGetUser(userName){
+  console.log('adminGetUser called');
+  let method = "GET";
+  let user = userName;
+  let at = "Bearer " + Cookies.get("accessToken");
+  let url = apiUrl + "/environments/" + environmentId + "/users/?filter=username%20eq%20%22" + userName + "%22";
+  console.log('ajax (' + url + ')');
+  console.log('at =' + at);
+  console.log("make ajax call");
+  $.ajax({
+    async: "true",
+    url: url,
+    method: method,
+    beforeSend: function(xhr) {
+      xhr.setRequestHeader('Authorization', at);
+    }
+  }).done(function(response) {
+    console.log(response);
+    setUserValues(response);
+  });
+  console.log("adminGetUser completed")
+
+}
+
+function getUserAPI(json){
+
+  return userJson.given
+
+}
+
 function getUserValues(userID) {
   console.log('getUserValues called');
   let method = "GET";
