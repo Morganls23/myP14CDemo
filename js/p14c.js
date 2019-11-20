@@ -413,7 +413,7 @@ function resetPassword(userID){
     console.log("resetPassword finished");
 }
 
-function adminGetUser(userName){
+function adminGetUser(){
   //{{apiPath}}/environments/{{envID}}/users/?filter=username%20eq%20%22lsmith%22
   console.log('adminGetUser called');
   let method = "GET";
