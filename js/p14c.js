@@ -368,7 +368,7 @@ function setUserValues(userJson) {
   let uuid = Cookies.get('uuid');
   //let streetAddress = userJson.address.streetAddress + " " + userJson.address.locality + ", " + userJson.address.region + " " + userJson.address.postalCode;
   if (Cookies.get("accessToken")) {
-    document.getElementById("user").value = 'Hello ' + userJson.name.given + "!";
+    document.getElementById("user").value = 'Hello ' + userJson._embedded.name.given + "!";
     document.getElementById("fname").value = userJson.name.given;
     document.getElementById("lname").value = userJson.name.family;
     document.getElementById("email").value = userJson.email;
