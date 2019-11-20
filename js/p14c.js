@@ -390,7 +390,6 @@ function resetPassword(userID){
   let user = userID;
   let at = "Bearer " + Cookies.get("accessToken");
   let url = apiUrl + "/environments/" + environmentId + "/users/" + user + 'password';
-  });
   console.log('ajax (' + url + ')');
   console.log('at =' + at);
   console.log("make ajax call");
@@ -398,8 +397,7 @@ function resetPassword(userID){
       async: "true",
       url: url,
       method: method,
-      dataType: 'json',
-      contentType: 'application/json',
+      contentType: 'application/vnd.pingidentity.password.sendRecoveryCode+json',
       beforeSend: function(xhr) {
         xhr.setRequestHeader('Authorization', at);
       }
