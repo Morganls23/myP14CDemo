@@ -115,8 +115,9 @@ function validatePassword() {
 // validate one time passcode function
 function validateOtp() {
   console.log('validateOtp called');
+  let otp   = document.getElementById("otp");
   let payload = JSON.stringify({
-    otp: document.getElementById("otp");
+    otp: otp
   });
   let url = $('#validateOtpUrl').val();
   let contenttype = $('#validateOtpContentType').val();
