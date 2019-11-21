@@ -119,8 +119,10 @@ function validateOtp() {
   let payload = JSON.stringify({
     otp: otp
   });
-  let url = $('#validateOtpUrl').val();
-  let contenttype = $('#validateOtpContentType').val();
+  //let url = $('#validateOtpUrl').val();
+  let url = (authUrl + '/' + environmentId + '/flows/' + flowId);
+  let contenttype =authUrl + 'application/vnd.pingidentity.otp.check+json';
+  //$('#validateOtpContentType').val();
   console.log('url :' + url);
   console.log('otp: ' + otp);
   console.log('content' + contenttype);

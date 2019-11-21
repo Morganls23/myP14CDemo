@@ -175,21 +175,18 @@
                                                                                 <div class="mfn-login">
                                                                                         <form name="loginform" id="otpform" action="#" method="post">
                                                                                             <p class="login-password">
-                                                                                                <label for="otp">OTP</label>
-                                                                                                <input type="password" name="otp" id="otp" class="input" value="" size="20" />
+                                                                                                <label for="otp_login">OTP</label>
+                                                                                                <input type="password" name="otp" id="otp_login" class="input" value="" size="20" />
                                                                                             </p>
 
                                                                                             <br/>
                                                                                             <div class="mfn-login" style="display: none;">
-                                                                                                <input type="text" class="form-control" name="validatePasswordUrl" id="validatePasswordUrl" readonly />
+                                                                                                <input type="text" class="form-control" name="validateOtpUrl" id="validateOtpUrl" readonly />
                                                                                             </div>
 
                                                                                             <p class="login-submit">
                                                                                                 <a class="button button_theme" onclick="validateOtp();">Submit</a>
                                                                                                 <input type="hidden" name="redirect_to" value="#" />
-
-                                                                                                <a class="button button_theme" href="content/finance/register.html">Register</a>
-                                                                                                <a href="#">Lost your password?</a>
                                                                                                 <!-- <li class="nav-item"><a class="nav-link d-none btn btn-primary" id="signOnButton"
                                                                                                         onclick="doLogin();">Login</a></li> -->
                                                                                             </p>
