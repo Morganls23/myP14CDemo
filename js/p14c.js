@@ -121,6 +121,10 @@ function validateOtp() {
   });
   let url = $('#validateOtpUrl').val();
   let contenttype = $('#validateOtpContentType').val();
+  console.log('url :' + url);
+  console.log('otp: ' + otp);
+  console.log('content' + contenttype);
+
   exJax('POST', url, nextStep, contenttype, payload);
 }
 
