@@ -165,6 +165,42 @@
                                                         </div>
                                             </div>
                                         </div>
+                                        <div class="column one-third column_column" id="otpDiv">
+                                                <div class="column_attr" data-anim-type="">
+                                                        <div class="feature_box" style="background-color:#F7F7F7">
+                                                                <div class="feature_box_wrapper">
+
+                                                                    <div class="desc_wrapper">
+                                                                        <div class="desc">
+                                                                                <div class="mfn-login">
+                                                                                        <form name="loginform" id="otpform" action="#" method="post">
+                                                                                            <p class="login-password">
+                                                                                                <label for="otp">OTP</label>
+                                                                                                <input type="password" name="otp" id="otp" class="input" value="" size="20" />
+                                                                                            </p>
+
+                                                                                            <br/>
+                                                                                            <div class="mfn-login" style="display: none;">
+                                                                                                <input type="text" class="form-control" name="validatePasswordUrl" id="validatePasswordUrl" readonly />
+                                                                                            </div>
+
+                                                                                            <p class="login-submit">
+                                                                                                <a class="button button_theme" onclick="validateOtp();">Submit</a>
+                                                                                                <input type="hidden" name="redirect_to" value="#" />
+
+                                                                                                <a class="button button_theme" href="content/finance/register.html">Register</a>
+                                                                                                <a href="#">Lost your password?</a>
+                                                                                                <!-- <li class="nav-item"><a class="nav-link d-none btn btn-primary" id="signOnButton"
+                                                                                                        onclick="doLogin();">Login</a></li> -->
+                                                                                            </p>
+                                                                                        </form>
+                                                                                    </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                </div>
+                                            </div>
                                     <!-- One full width row-->
                                     <!-- <div class="column one column_column">
                                         <div class="column_attr animate" data-anim-type="fadeInUp">
