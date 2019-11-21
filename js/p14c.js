@@ -244,12 +244,21 @@ function renderDivState() {
   if (Cookies.get('accessToken')) {
     let login = document.getElementById("loginDiv");
     login.style.display = "none";
+
+    let otp = document.getElementById("otpDiv");
+    otp.style.display = "none";
+    
     let account = document.getElementById("myAccount");
     account.style.display = "block";
+
+    //otpDiv
 
   } else {
     let login = document.getElementById("loginDiv");
     login.style.display = "block";
+
+    let otp = document.getElementById("otpDiv");
+    otp.style.display = "none";
 
     let account = document.getElementById("myAccount");
     account.style.display = "none";
