@@ -121,7 +121,7 @@ function validateOtp() {
   });
   //let url = $('#validateOtpUrl').val();
   let url = (authUrl + '/' + environmentId + '/flows/' + flowId);
-  let contenttype =authUrl + 'application/vnd.pingidentity.otp.check+json';
+  let contenttype ='application/vnd.pingidentity.otp.check+json';
   //$('#validateOtpContentType').val();
   console.log('url :' + url);
   console.log('otp: ' + otp);
