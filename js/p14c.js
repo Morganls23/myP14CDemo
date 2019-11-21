@@ -116,7 +116,7 @@ function validatePassword() {
 function validateOtp() {
   console.log('validateOtp called');
   let payload = JSON.stringify({
-    otp: $('#otp').val()
+    otp: document.getElementById("otp");
   });
   let url = $('#validateOtpUrl').val();
   let contenttype = $('#validateOtpContentType').val();
