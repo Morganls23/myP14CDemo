@@ -803,3 +803,7 @@ function registerUser() {
     getUserValues();
   }, 1000);
 }
+
+function redirect_toReg(){
+  location.href = 'https://morganapps.ping-eng.com/myP14CDemo/content/finance/register.html?' + 'environmentId=' + environmentId + '&flowId=' + flowId;
+}
