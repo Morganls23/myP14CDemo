@@ -607,10 +607,10 @@ function getAccessToken() {
   $.ajax({
       async: "true",
       method: "POST",
-      url: "https://auth.pingone.com/e2431bcc-0d0b-4574-9dbc-ff8c91bb799e/as/token",
+      url: url,
       beforeSend: function(xhr) {
         xhr.setRequestHeader(
-          "Authorization", "Basic ZGM0M2I0M2UtMWEzZS00ZDFmLWJhY2ItMjgwZGZiNTNlODM1OjBLTWpQSTNZR1Y0Q2JCSH5WRkljLjlqTlJPR3dGQ2Y5T1Fzb216aV9iR3R4WnpraHBKeEdaeUZaOX5oRF9zNUg="
+          "Authorization", auth
         )
       },
       headers: {
