@@ -255,48 +255,9 @@
     });
     // some housekeeping variables
 
-    $('#changePassword').on('input', function (e) {
-      let thisPassword = $('#changePassword').val();
-
-    if (regexLower.test(thisPassword)) {
-      $('#lowercase').removeClass('text-primary');
-      } else {
-        $('#lowercase').addClass('text-primary');
-      }
-      if (regexUpper.test(thisPassword)) {
-        $('#uppercase').removeClass('text-primary');
-      } else {
-        $('#uppercase').addClass('text-primary');
-      }
-
-      if (regexNumeric.test(thisPassword)) {
-        $('#numeric').removeClass('text-primary');
-      } else {
-        $('#numeric').addClass('text-primary');
-      }
-
-      if (regexSpecial.test(thisPassword)) {
-        $('#special').removeClass('text-primary');
-      } else {
-        $('#special').addClass('text-primary');
-      }
-
-              if (regexLength.test(thisPassword)) {
-                $('#length').removeClass('text-primary');
-              } else {
-                $('#length').addClass('text-primary');
-              }
-            });
             // begin process
             $(document).ready(function () {
               console.log("Page ready function");
-
-              // determine if user is already signed in, and show appropriate login/logout buttons
-
-              //renderButtonState();
-              renderDivState();
-
-              // do I already have a session cookie?
 
               if (Cookies.get('accessToken') && Cookies.get('idToken')) {
                 // yes, user already has a session
@@ -326,8 +287,7 @@
 
                     // url does not have a flowId.  and we don't have a session.  send them authorizationUrl
                     console.log('No flowId found in url');
-                    console.log('Redirecting to p14c to bootstrap session');
-                    window.location.replace(authorizationUrl);
+                    //window.location.replace(authorizationUrl);
 
                   }
 
