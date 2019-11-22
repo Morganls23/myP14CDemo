@@ -603,7 +603,7 @@ function getAccessToken() {
   let auth = "Basic " + hash;
   let contentType = "application/x-www-form-urlencoded";
   console.log(auth);
-  exJax("POST", url, null, contentType, null);
+  exJax("POST", url, nextStep, contentType, payload);
 
 }
 
