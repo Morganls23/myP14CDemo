@@ -602,8 +602,6 @@ function getAccessToken() {
   let hash = btoa(tok);
   let auth = "Basic " + hash;
   console.log(auth);
-  //let settings =
-
   $.ajax({
       async: "true",
       method: "POST",
@@ -614,8 +612,7 @@ function getAccessToken() {
         )
       },
       headers: {
-        "Content-Type": "application/json",
-        //"Authorization": "Basic ZGM0M2I0M2UtMWEzZS00ZDFmLWJhY2ItMjgwZGZiNTNlODM1OjBLTWpQSTNZR1Y0Q2JCSH5WRkljLjlqTlJPR3dGQ2Y5T1Fzb216aV9iR3R4WnpraHBKeEdaeUZaOX5oRF9zNUg=",
+        "Content-Type": "application/x-www-form-urlencoded",
         "cache-control": "no-cache",
         "access-control-allow-headers": "cache-control, Origin, Authorization",
         "Access-Control-Allow-Methods": "POST, GET, OPTIONS"
@@ -661,7 +658,7 @@ function registerUser() {
       url: url,
       method: method,
       dataType: 'json',
-      contentType: 'application/json',
+      contentType: 'application/vnd.pingidentity.user.register+json',
       data: payload,
       beforeSend: function(xhr) {
         xhr.setRequestHeader('Authorization', at);
