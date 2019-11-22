@@ -220,13 +220,13 @@ const authorizationUrl =
     '/' +
     environmentId +
     '/as/authorize?client_id=' +
-    adminClientId +
+    clientId +
     '&response_type=' +
     responseType +
     '&redirect_uri=' +
     "https://morganapps.ping-eng.com/myP14CDemo/content/finance/register.html" +
     '&scope=' +
-    adminScopes;
+    scopes;
 
 
 // simple function to parse json web token
