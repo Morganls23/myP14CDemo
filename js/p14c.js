@@ -715,7 +715,7 @@ function getSubscriptions (userData) {  //will need ot use getUserValues() to ge
 function registerUser() {
   console.log("registerUser was called");
   let method = "POST";
-  let contenttype = 'application/vnd.pingidentity.user.register+json';
+  let contentType = 'application/vnd.pingidentity.user.register+json';
   let url = apiUrl + "/environments/" + environmentId + "/flows/" + flowId;
   let payload = JSON.stringify({
     Attr2: $('#user_company').val(),
