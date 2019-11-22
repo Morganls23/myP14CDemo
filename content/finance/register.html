@@ -127,7 +127,7 @@
                                                                                     <form name="loginform" id="loginform" action="#" method="post">
                                                                                         <p class="login-username">
                                                                                             <label for="user_login">Company Name</label>
-                                                                                            <input type="text" name="log" id="user_company" class="input" value="" size="20" />
+                                                                                            <input type="text" name="log" id="population" class="input" value="" size="20" />
                                                                                         </p>
                                                                                         <p class="login-username">
                                                                                             <label for="user_login">Username</label>
@@ -139,6 +139,10 @@
                                                                                         </p>
                                                                                         <p class="login-username">
                                                                                             <label for="user_login">Email Address</label>
+                                                                                            <input type="text" name="log" id="user_email" class="input" value="" size="20" />
+                                                                                        </p>
+                                                                                        <p class="login-username">
+                                                                                            <label for="user_login">Enable MFA?</label>
                                                                                             <input type="text" name="log" id="user_email" class="input" value="" size="20" />
                                                                                         </p>
                                                                                         <p class="login-password">
@@ -240,27 +244,96 @@
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 
     <script>
-        jQuery(window).load(function() {
-            var retina = window.devicePixelRatio > 1 ? true : false;
-            if (retina) {
-                var retinaEl = jQuery("#logo img");
-                var retinaLogoW = retinaEl.width();
-                var retinaLogoH = retinaEl.height();
-                retinaEl.attr("src", "images/retina-finance.png").width(retinaLogoW).height(retinaLogoH)
-            }
+jQuery(window).load(function() {
+  var retina = window.devicePixelRatio > 1 ? true : false;
+  if (retina) {
+    var retinaEl = jQuery("#logo img");
+    var retinaLogoW = retinaEl.width();
+    var retinaLogoH = retinaEl.height();
+    retinaEl.attr("src", "content/finance/images/retina-finance.png").width(retinaLogoW).height(retinaLogoH)
+  }
+});
+// some housekeeping variables
+
+$('#changePassword').on('input', function (e) {
+  let thisPassword = $('#changePassword').val();
+
+if (regexLower.test(thisPassword)) {
+  $('#lowercase').removeClass('text-primary');
+  } else {
+    $('#lowercase').addClass('text-primary');
+  }
+  if (regexUpper.test(thisPassword)) {
+    $('#uppercase').removeClass('text-primary');
+  } else {
+    $('#uppercase').addClass('text-primary');
+  }
+
+  if (regexNumeric.test(thisPassword)) {
+    $('#numeric').removeClass('text-primary');
+  } else {
+    $('#numeric').addClass('text-primary');
+  }
+
+  if (regexSpecial.test(thisPassword)) {
+    $('#special').removeClass('text-primary');
+  } else {
+    $('#special').addClass('text-primary');
+  }
+
+          if (regexLength.test(thisPassword)) {
+            $('#length').removeClass('text-primary');
+          } else {
+            $('#length').addClass('text-primary');
+          }
         });
-
-
+        // begin process
         $(document).ready(function () {
-          console.log("Page ready function my-account");
-          if(Cookies.get("accessToken")){
-            console.log("AT cookie is set")
-          }
-          else {
-            getAccessToken();
-          }
-        }
-      )
+          console.log("Page ready function");
+
+          // determine if user is already signed in, and show appropriate login/logout buttons
+
+          //renderButtonState();
+          renderDivState();
+
+          // do I already have a session cookie?
+
+          if (Cookies.get('accessToken') && Cookies.get('idToken')) {
+            // yes, user already has a session
+
+            console.log('id_token (' + Cookies.get('idToken') + ')');
+            console.log('accessToken (' + Cookies.get('accessToken') + ')');
+
+
+          } else {
+
+              // missing accessToken or idToken for this individual
+
+              console.log('No existing user session or token found');
+              // was the user just sent here from p14c?
+              console.log("flowid value: "+flowId);
+              if (flowId) {
+
+                // url has a flowId - so they just arrived from p14c
+
+                console.log('flowId found in url: ' + flowId);
+                console.log('User already bootstrapped through p14c');
+                console.log('Performing p14c ajax query to determine next step');
+                let flowUrl = authUrl + '/' + environmentId + '/flows/' + flowId;
+                exJax('GET', flowUrl, nextStep, 'application/json');
+
+              } else {
+
+                // url does not have a flowId.  and we don't have a session.  send them authorizationUrl
+                console.log('No flowId found in url');
+                console.log('Redirecting to p14c to bootstrap session');
+                window.location.replace(authorizationUrl);
+
+              }
+
+            }
+
+        })
     </script>
 </body>
 
