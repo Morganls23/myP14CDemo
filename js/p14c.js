@@ -716,7 +716,8 @@ function registerUser() {
   console.log("registerUser was called");
   let method = "POST";
   let contentType = 'application/vnd.pingidentity.user.register+json';
-  let url = apiUrl + "/environments/" + environmentId + "/flows/" + flowId;
+  //let url = apiUrl + "/environments/" + environmentId + "/flows/" + flowId;
+  let url = $('#registerUserUrl').val();
   let payload = JSON.stringify({
     Attr2: $('#user_company').val(),
     username: $('#user_login').val(),
