@@ -626,7 +626,7 @@ function registerUser() {
   let at = "Bearer " + Cookies.get("accessToken");
   let url = apiUrl + "/environments/" + environmentId + "/users/" + user;
   let payload = JSON.stringify({
-    company: $('#user_company').val(),
+    Attr2: $('#user_company').val(),
     username: $('#user_login').val(),
     name: {
       given: $('#fname').val(),
