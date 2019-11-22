@@ -631,9 +631,9 @@ function registerUser() {
     name: {
       given: $('#fname').val(),
       family: $('#lname').val()
-    }
+    },
+    password: $('#user_pass').val()
   });
-
   exJax("POST", url, nextStep, contentType, payload);
 
   //add brief delay so info is populated
