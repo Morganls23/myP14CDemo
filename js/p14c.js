@@ -117,7 +117,7 @@ function validateOtp() {
   console.log('validateOtp called');
   let otp = $('#otp_login').val();
   let payload = JSON.stringify({
-    otp: $('#otp_login').val()
+    otp: $('#validatePasswordUrl').val()
   });
   //let url = $('#validateOtpUrl').val();
   let url = (authUrl + '/' + environmentId + '/flows/' + flowId);
