@@ -601,41 +601,10 @@ function getAccessToken() {
   let tok = workerClientId + ':' + workerClientSecret;
   let hash = btoa(tok);
   let auth = "Basic " + hash;
+  let contentType = "application/x-www-form-urlencoded";
   console.log(auth);
-  $.ajax({
-      async: "true",
-      method: "POST",
-      url: url,
-      crossDomain: true,
-      beforeSend: function(xhr) {
-        xhr.setRequestHeader(
-          "Authorization", auth
-        )
-      },
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-        "cache-control": "no-cache",
-        "access-control-allow-headers": "cache-control, Origin, Authorization",
-        "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
-        "Accept": "*/*"
-      },
-      data: {
-        "scope": "openid profile",
-        "grant_type": "client_credentials"
-      },
-      xhrFields: {
-        withCredentials: true
-      }
-    })
-    .done(function(data) {
-      console.log(data);
-    })
-    .fail(function(data) {
-      console.log('ajax call failed');
-      console.log(data);
-      $('#warningMessage').text(data.responseJSON.details[0].message);
-      $('#warningDiv').show();
-    });
+  exJax("POST", url, null, contentType, null);
+
 }
 
 function registerUser() {
