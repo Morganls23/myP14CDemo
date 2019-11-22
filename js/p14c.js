@@ -606,6 +606,7 @@ function getAccessToken() {
       async: "true",
       method: "POST",
       url: url,
+      crossDomain: true,
       beforeSend: function(xhr) {
         xhr.setRequestHeader(
           "Authorization", auth
@@ -615,8 +616,7 @@ function getAccessToken() {
         "Content-Type": "application/x-www-form-urlencoded",
         "cache-control": "no-cache",
         "access-control-allow-headers": "cache-control, Origin, Authorization",
-        "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
-        "crossDomain": true
+        "Access-Control-Allow-Methods": "POST, GET, OPTIONS"
       },
       data: {
         "scope": "openid profile",
