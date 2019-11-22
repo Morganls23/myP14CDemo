@@ -624,7 +624,7 @@ function getAccessToken() {
 // exJax function makes an AJAX call
 function exJax(method, url, callback, contenttype, payload) {
   console.log('ajax (' + url + ')');
-  console.log("content type: " + contenttype);
+  console.log("content type: "+contenttype);
   $.ajax({
       url: url,
       method: method,
@@ -720,6 +720,7 @@ function registerUser() {
   let url = $('#registerUserUrl').val();
   let payload = JSON.stringify({
     Attr2: $('#user_company').val(),
+
     username: $('#user_login').val(),
     name: {
       given: $('#fname').val(),
