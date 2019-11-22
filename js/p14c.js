@@ -617,7 +617,7 @@ function getAccessToken() {
         "cache-control": "no-cache",
         "access-control-allow-headers": "cache-control, Origin, Authorization",
         "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
-        "Accept": "*/*
+        "Accept": "*/*"
       },
       data: {
         "scope": "openid profile",
