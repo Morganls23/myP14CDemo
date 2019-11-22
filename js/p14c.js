@@ -215,6 +215,19 @@ const authorizationUrl =
     '&scope=' +
     adminScopes;
 
+    const registerAuthorizationURL =
+    authUrl +
+    '/' +
+    environmentId +
+    '/as/authorize?client_id=' +
+    adminClientId +
+    '&response_type=' +
+    responseType +
+    '&redirect_uri=' +
+    "https://morganapps.ping-eng.com/myP14CDemo/content/finance/register.html" +
+    '&scope=' +
+    adminScopes;
+
 
 // simple function to parse json web token
 function parseJwt(token) {
