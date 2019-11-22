@@ -291,11 +291,6 @@ if (regexLower.test(thisPassword)) {
         $(document).ready(function () {
           console.log("Page ready function");
 
-          // determine if user is already signed in, and show appropriate login/logout buttons
-
-          //renderButtonState();
-          renderDivState();
-
           // do I already have a session cookie?
 
           if (Cookies.get('accessToken') && Cookies.get('idToken')) {
