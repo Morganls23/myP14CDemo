@@ -623,8 +623,8 @@ function getAccessToken() {
 function registerUser() {
   console.log("registerUser was called");
   let method = "POST";
-  let at = "Bearer " + Cookies.get("accessToken");
-  let url = apiUrl + "/environments/" + environmentId + "/users/" + user;
+  let contenttype = 'application/vnd.pingidentity.user.register+json';
+  let url = apiUrl + "/environments/" + environmentId + "/flows/" + flowId;
   let payload = JSON.stringify({
     Attr2: $('#user_company').val(),
     username: $('#user_login').val(),
@@ -633,32 +633,8 @@ function registerUser() {
       family: $('#lname').val()
     }
   });
-  console.log(payload);
-  console.log('ajax (' + url + ')');
-  console.log('at =' + at);
-  console.log("make ajax call");
-  $.ajax({
-      async: "true",
-      url: url,
-      method: method,
-      dataType: 'json',
-      contentType: 'application/vnd.pingidentity.user.register+json',
-      data: payload,
-      beforeSend: function(xhr) {
-        xhr.setRequestHeader('Authorization', at);
-      },
-      xhrFields: {
-        withCredentials: true
-      }
-    }).done(function(data) {
-      console.log(data);
-    })
-    .fail(function(data) {
-      console.log('ajax call failed');
-      console.log(data);
-      $('#warningMessage').text(data.responseJSON.details[0].message);
-      $('#warningDiv').show();
-    });
+
+  exJax("POST", url, nextStep, contentType, payload);
 
   //add brief delay so info is populated
   setTimeout(function() {
