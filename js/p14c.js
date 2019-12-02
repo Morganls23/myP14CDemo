@@ -411,6 +411,7 @@ function setUserValues(userJson) {
 }
 
 
+
 function resetPassword(){
 
   //https://api.pingone.com/v1/environments/7334523a-4a2d-4dd6-9f37-93c60114e938/users/bfd0e265-abe6-41c9-aca6-2352478b30da/password
@@ -708,6 +709,29 @@ function getSubscriptions (userData) {  //will need ot use getUserValues() to ge
   }
 }
 
+sendOTPForgetPassword(){
+  console.log('sendOTPForgetPassword called');
+  let payload = JSON.stringify({
+    username: $('#user_login').val()
+  });
+  let url = $('#forgotPasswordURL').val();
+  let contenttype = 'application/vnd.pingidentity.password.forgot+json';
+  console.log(url);
+  exJax('POST', url, nextStep, contenttype, payload);
+}
+
+setForgotPassword(otp, password){
+  console.log('setForgotPassword called');
+  let payload = JSON.stringify({
+    recoveryCode: $('#otp_reset').val(),
+    newPassword: $('#user_new_pass').val()
+
+  });
+  let url = $('#forgotPasswordURL').val();
+  let contenttype = $('#changePasswordContentType').val();
+  exJax('POST', url, nextStep, contenttype, payload);
+}
+
 
 
 
@@ -717,7 +741,8 @@ function registerUser() {
   let method = "POST";
   let contentType = 'application/vnd.pingidentity.user.register+json';
   //let url = apiUrl + "/environments/" + environmentId + "/flows/" + flowId;
-  let url = $('#registerUserUrl').val();
+  //let url = $('#registerUserUrl').val();
+  let url
   let payload = JSON.stringify({
     Attr2: $('#user_company').val(),
 
