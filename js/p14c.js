@@ -709,7 +709,7 @@ function getSubscriptions (userData) {  //will need ot use getUserValues() to ge
   }
 }
 
-sendOTPForgetPassword(){
+/* sendOTPForgetPassword() {
   console.log('sendOTPForgetPassword called');
   let payload = JSON.stringify({
     username: $('#user_login').val()
@@ -720,7 +720,7 @@ sendOTPForgetPassword(){
   exJax('POST', url, nextStep, contenttype, payload);
 }
 
-setForgotPassword(otp, password){
+setForgotPassword(otp, password) {
   console.log('setForgotPassword called');
   let payload = JSON.stringify({
     recoveryCode: $('#otp_reset').val(),
@@ -732,8 +732,7 @@ setForgotPassword(otp, password){
   exJax('POST', url, nextStep, contenttype, payload);
 }
 
-
-
+*/
 
 //--------Registration -------//
 function registerUser() {
