@@ -148,6 +148,7 @@ function nextStep(data) {
       $('#loginDiv').show();
       $('#otpDiv').show();
       $('#verifyUserUrl').val(data._links['user.​verify'].href);
+      break;
     case 'PASSWORD_REQUIRED':
       console.log('Rendering login form');
       $('#loginDiv').show();
