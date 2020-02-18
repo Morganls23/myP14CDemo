@@ -148,7 +148,7 @@ function nextStep(data) {
       $('#loginDiv').hide();
       $('#otpDiv').show();
       $('#verifyUserContentType').val('application/vnd.pingidentity.user.verify+json');
-      $('#verifyUserUrl').val(data._links['user.​verify'].href);
+      $('#verifyUserUrl').val(data._links['user.verify'].href);
       break;
     case 'PASSWORD_REQUIRED':
       console.log('Rendering login form');
