@@ -145,8 +145,9 @@ function nextStep(data) {
       break;
     case 'VERIFICATION_CODE_REQUIRED':
       console.log('Rendering Verification code form');
-      $('#loginDiv').show();
+      $('#loginDiv').hide();
       $('#otpDiv').show();
+      $('#verifyUserContentType').val('application/vnd.pingidentity.user.verify+json');
       $('#verifyUserUrl').val(data._links['user.​verify'].href);
       break;
     case 'PASSWORD_REQUIRED':
@@ -767,6 +768,23 @@ function registerUser() {
   //setTimeout(function() {
   //  getUserValues();
   //}, 1000);
+}
+
+function verifyUser(){
+  console.log('verifyUser called');
+  let otp = $('#otp_login').val();
+  let payload = JSON.stringify({
+    otp: $('#otp_login').val()
+  });
+  //let url = $('#validateOtpUrl').val();
+  let url = $('verifyUserUrl').val();
+  let contenttype ='application/vnd.pingidentity.user.verify+json';
+  //$('#validateOtpContentType').val();
+  console.log('url :' + url);
+  console.log('otp: ' + otp);
+  console.log('content' + contenttype);
+
+  exJax('POST', url, nextStep, contenttype, payload);
 }
 
 function redirect_toReg(){
