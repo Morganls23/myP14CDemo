@@ -115,7 +115,7 @@
                                     <!-- Two Third (2/3) Column -->
                                     <div class="column one-fourth column_column"></div>
                                     <!-- One Third (1/3) Column -->
-                                    <div class="column one-half column_column">
+                                    <div class="column one-half column_column" id=loginDiv>
                                             <div class="column_attr" data-anim-type="fadein">
                                                     <div class="feature_box" style="background-color:#F7F7F7">
                                                             <div class="feature_box_wrapper">
@@ -170,6 +170,39 @@
                                                         </div>
                                             </div>
                                     </div>
+                                    <div class="column one-third column_column" id="otpDiv">
+                                            <div class="column_attr" data-anim-type="">
+                                                    <div class="feature_box" style="background-color:#F7F7F7">
+                                                            <div class="feature_box_wrapper">
+
+                                                                <div class="desc_wrapper">
+                                                                    <div class="desc">
+                                                                            <div class="mfn-login">
+                                                                                    <form name="loginform" id="otpform" action="#" method="post">
+                                                                                        <p class="login-password">
+                                                                                            <label for="otp_login">Verification Code</label>
+                                                                                            <input type="text" name="otp" id="otp_login" class="input" value="" size="20" />
+                                                                                        </p>
+
+                                                                                        <br/>
+                                                                                        <div class="mfn-login" style="display: none;">
+                                                                                            <input type="text" class="form-control" name="verifyUserUrl" id="verifyUserUrl" readonly />
+                                                                                        </div>
+
+                                                                                        <p class="login-submit">
+                                                                                            <a class="button button_theme" onclick="validateOtp();">Submit</a>
+                                                                                            <input type="hidden" name="redirect_to" value="./my-account.html" />
+                                                                                            <!-- <li class="nav-item"><a class="nav-link d-none btn btn-primary" id="signOnButton"
+                                                                                                    onclick="doLogin();">Login</a></li> -->
+                                                                                        </p>
+                                                                                    </form>
+                                                                                </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                            </div>
+                                        </div>
 
                                     <!-- Page devider -->
                                     <!-- One full width row-->

@@ -143,6 +143,11 @@ function nextStep(data) {
       $('#validatePasswordContentType').val('application/vnd.pingidentity.usernamePassword.check+json');
       $('#registerUserUrl').val(data._links['user.register'].href);
       break;
+    case 'VERIFICATION_CODE_REQUIRED':
+      console.log('Rendering Verification code form');
+      $('#loginDiv').show();
+      $('#otpDiv').show();
+      $('#verifyUserUrl').val(data._links['user.​verify'].href);
     case 'PASSWORD_REQUIRED':
       console.log('Rendering login form');
       $('#loginDiv').show();
