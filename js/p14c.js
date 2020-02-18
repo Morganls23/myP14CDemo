@@ -141,6 +141,7 @@ function nextStep(data) {
       $('#otpDiv').hide();
       $('#validatePasswordUrl').val(data._links['usernamePassword.check'].href);
       $('#validatePasswordContentType').val('application/vnd.pingidentity.usernamePassword.check+json');
+      $('#registerUserUrl').val(data._links['user.register'].href);
       break;
     case 'PASSWORD_REQUIRED':
       console.log('Rendering login form');
