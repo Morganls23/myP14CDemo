@@ -752,8 +752,8 @@ function registerUser() {
     email: $('#user_email').val(),
     password: $('#user_pass').val()
   });
-  console.log("url:" url);
-  console.log("payload:" payload);
+  console.log('url:' url);
+  console.log('payload:' payload);
   exJax("POST", url, nextStep, contentType, payload);
 
   //add brief delay so info is populated
