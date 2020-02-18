@@ -744,12 +744,15 @@ function registerUser() {
   let url
   let payload = JSON.stringify({
     Attr2: $('#user_company').val(),
-
+    population: {
+      id: "57ee5904-32f3-4bfe-9504-d40704edeab0"
+    },
     username: $('#user_login').val(),
     name: {
       given: $('#fname').val(),
       family: $('#lname').val()
     },
+    phone: $('#user_phoneNumber').val(),
     password: $('#user_pass').val()
   });
   exJax("POST", url, nextStep, contentType, payload);
@@ -758,6 +761,24 @@ function registerUser() {
   setTimeout(function() {
     getUserValues();
   }, 1000);
+}
+function setpassword(){
+  "value": "{SSHA512}UkGWfORubNKFpFBWh+Lgy4FrciclzUXneuryV+B+zBDR4Gqd5wvMqAvKRixgQWoZlZUgq8Wh40uMK3s6bWpzWt1/TqQH02hX",
+  "forceChange": true
+  console.log("registerUser was called");
+  let method = "POST";
+  let contentType = 'application/vnd.pingidentity.user.register+json';
+  //let url = apiUrl + "/environments/" + environmentId + "/flows/" + flowId;
+  //let url = $('#registerUserUrl').val();
+  let url
+  let payload = JSON.stringify({
+    password: $('#user_pass').val(),
+    forceChange: 'true'
+  });
+  exJax("POST", url, nextStep, contentType, payload);
+
+
+
 }
 
 function redirect_toReg(){
