@@ -740,8 +740,8 @@ function registerUser() {
   let method = "POST";
   let contentType = 'application/vnd.pingidentity.user.register+json';
   //let url = apiUrl + "/environments/" + environmentId + "/flows/" + flowId;
-  //let url = $('#registerUserUrl').val();
-  let url
+  let url = $('#registerUserUrl').val();
+
   let payload = JSON.stringify({
     Attr2: $('#user_company').val(),
     population: {
@@ -752,6 +752,8 @@ function registerUser() {
     email: $('#user_email').val(),
     password: $('#user_pass').val()
   });
+  console.log("url:" url);
+  console.log("payload:" payload);
   exJax("POST", url, nextStep, contentType, payload);
 
   //add brief delay so info is populated
