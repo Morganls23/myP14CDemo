@@ -764,9 +764,9 @@ function registerUser() {
   exJax("POST", url, nextStep, contentType, payload);
 
   //add brief delay so info is populated
-  setTimeout(function() {
-    getUserValues();
-  }, 1000);
+  //setTimeout(function() {
+  //  getUserValues();
+  //}, 1000);
 }
 
 function redirect_toReg(){
