@@ -103,7 +103,7 @@ function validatePassword() {
     username: $('#user_login').val(),
     password: $('#user_pass').val()
   });
-  console.log('payload is ' + payload)
+  console.log('payload is ' + payload);
   //let url = $('#validatePasswordUrl').val();
   let url = (authUrl + environmentId + '/flows/' + flowId);
   console.log('url is: ' + url);
