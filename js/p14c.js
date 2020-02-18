@@ -104,8 +104,8 @@ function validatePassword() {
     password: $('#user_pass').val()
   });
   console.log('payload is ' + payload)
-  let url = $('#validatePasswordUrl').val();
-  //let url = (authUrl + environmentId + '/flows/' + flowId);
+  //let url = $('#validatePasswordUrl').val();
+  let url = (authUrl + environmentId + '/flows/' + flowId);
   console.log('url is: ' + url);
   let contenttype = 'application/vnd.pingidentity.usernamePassword.check+json';
   console.log('contenttype is ' + contenttype);
