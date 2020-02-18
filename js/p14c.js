@@ -762,24 +762,6 @@ function registerUser() {
     getUserValues();
   }, 1000);
 }
-function setpassword(){
-  "value": "{SSHA512}UkGWfORubNKFpFBWh+Lgy4FrciclzUXneuryV+B+zBDR4Gqd5wvMqAvKRixgQWoZlZUgq8Wh40uMK3s6bWpzWt1/TqQH02hX",
-  "forceChange": true
-  console.log("registerUser was called");
-  let method = "POST";
-  let contentType = 'application/vnd.pingidentity.user.register+json';
-  //let url = apiUrl + "/environments/" + environmentId + "/flows/" + flowId;
-  //let url = $('#registerUserUrl').val();
-  let url
-  let payload = JSON.stringify({
-    password: $('#user_pass').val(),
-    forceChange: 'true'
-  });
-  exJax("POST", url, nextStep, contentType, payload);
-
-
-
-}
 
 function redirect_toReg(){
   location.href = 'https://morganapps.ping-eng.com/myP14CDemo/content/finance/register.html?' + 'environmentId=' + environmentId + '&flowId=' + flowId;
