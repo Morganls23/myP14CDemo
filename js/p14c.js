@@ -748,11 +748,8 @@ function registerUser() {
       id: "57ee5904-32f3-4bfe-9504-d40704edeab0"
     },
     username: $('#user_login').val(),
-    name: {
-      given: $('#fname').val(),
-      family: $('#lname').val()
-    },
     phone: $('#user_phoneNumber').val(),
+    email: $('#user_email').val(),
     password: $('#user_pass').val()
   });
   exJax("POST", url, nextStep, contentType, payload);
