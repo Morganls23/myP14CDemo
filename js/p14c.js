@@ -31,10 +31,9 @@ const workerClientSecret='W5PdV0UP_p-a0FfHOvrgUfs88VzERThYPZs1-.6HC0_VQ4IWS4UX1X
 
 
 // Authentitcaiton
-const adminClientId = 'd915beea-7682-4441-b7ed-92fef5b3b9bb';
-const adminClientSecret = 'DdkqZjXBqnpQ_0hy19cX8bKRvv_ZSOxIKk.byHqEAf2cSlOE7XoOLEU63euEjnx.';
+const adminClientId = '77838143-24eb-4223-9eeb-8559baa52c5a';
+const adminClientSecret = 'w7TxHDpxX2hECtHc4g9bh~M_GwcNMMLF4VmQOUFc0LAS1JQ.PN86mUdmzjpk2KCY';
 const adminRedirectUri =baseUrl + 'myP14CDemo/content/finance/admin-login.html';
-const adminScopes = 'profile address phone email openid';
 
 
 function generateNonce(length) {
@@ -103,9 +102,9 @@ function validatePassword() {
     username: $('#user_login').val(),
     password: $('#user_pass').val()
   });
-  console.log('payload is ' + payload);
-  //let url = $('#validatePasswordUrl').val();
-  let url = (authUrl + environmentId + '/flows/' + flowId);
+  console.log('payload is ' + payload)
+  let url = $('#validatePasswordUrl').val();
+  //let url = (authUrl + environmentId + '/flows/' + flowId);
   console.log('url is: ' + url);
   let contenttype = 'application/vnd.pingidentity.usernamePassword.check+json';
   console.log('contenttype is ' + contenttype);
@@ -115,18 +114,11 @@ function validatePassword() {
 // validate one time passcode function
 function validateOtp() {
   console.log('validateOtp called');
-  let otp = $('#otp_login').val();
   let payload = JSON.stringify({
-    otp: $('#validatePasswordUrl').val()
+    otp: $('#otp').val()
   });
-  //let url = $('#validateOtpUrl').val();
-  let url = (authUrl + '/' + environmentId + '/flows/' + flowId);
-  let contenttype ='application/vnd.pingidentity.otp.check+json';
-  //$('#validateOtpContentType').val();
-  console.log('url :' + url);
-  console.log('otp: ' + otp);
-  console.log('content' + contenttype);
-
+  let url = $('#validateOtpUrl').val();
+  let contenttype = $('#validateOtpContentType').val();
   exJax('POST', url, nextStep, contenttype, payload);
 }
 
@@ -200,35 +192,6 @@ const authorizationUrl =
   '&scope=' +
   scopes;
 
-
-  //build the admin auth url
-  const adminAuthorizationUrl =
-    authUrl +
-    '/' +
-    environmentId +
-    '/as/authorize?client_id=' +
-    adminClientId +
-    '&response_type=' +
-    responseType +
-    '&redirect_uri=' +
-    adminRedirectUri +
-    '&scope=' +
-    adminScopes;
-
-    const registerAuthorizationURL =
-    authUrl +
-    '/' +
-    environmentId +
-    '/as/authorize?client_id=' +
-    clientId +
-    '&response_type=' +
-    responseType +
-    '&redirect_uri=' +
-    "https://morganapps.ping-eng.com/myP14CDemo/content/finance/register.html" +
-    '&scope=' +
-    scopes;
-
-
 // simple function to parse json web token
 function parseJwt(token) {
   console.log("parseJWT was called");
@@ -257,21 +220,12 @@ function renderDivState() {
   if (Cookies.get('accessToken')) {
     let login = document.getElementById("loginDiv");
     login.style.display = "none";
-
-    let otp = document.getElementById("otpDiv");
-    otp.style.display = "none";
-
     let account = document.getElementById("myAccount");
     account.style.display = "block";
-
-    //otpDiv
 
   } else {
     let login = document.getElementById("loginDiv");
     login.style.display = "block";
-
-    let otp = document.getElementById("otpDiv");
-    otp.style.display = "none";
 
     let account = document.getElementById("myAccount");
     account.style.display = "none";
@@ -410,120 +364,6 @@ function setUserValues(userJson) {
   //let idPayload = parseJwt(idToken);
 }
 
-
-
-function resetPassword(){
-
-  //https://api.pingone.com/v1/environments/7334523a-4a2d-4dd6-9f37-93c60114e938/users/bfd0e265-abe6-41c9-aca6-2352478b30da/password
-  console.log("resetPassword was called");
-  let method = "POST";
-  let user = Cookies.get("currentUser");
-  let at = "Bearer " + Cookies.get("accessToken");
-  let url = apiUrl + "/environments/" + environmentId + "/users/" + user + '/password';
-  console.log('ajax (' + url + ')');
-  console.log('at =' + at);
-  console.log("make ajax call");
-  $.ajax({
-      async: "true",
-      url: url,
-      method: method,
-      contentType: 'application/vnd.pingidentity.password.sendRecoveryCode+json',
-      beforeSend: function(xhr) {
-        xhr.setRequestHeader('Authorization', at);
-      }
-    }).done(function(data) {
-      console.log(data);
-    })
-    .fail(function(data) {
-      console.log('ajax call failed');
-      console.log(data);
-      $('#warningMessage').text(data.responseJSON.details[0].message);
-      $('#warningDiv').show();
-    });
-    console.log("resetPassword finished");
-}
-
-
-function adminChangePassword(){
-  console.log("adminChangePassword was called");
-  let method = "PUT";
-  let user = Cookies.get("currentUser");
-  let at = "Bearer " + Cookies.get("accessToken");
-  let url = apiUrl + "/environments/" + environmentId + "/users/" + user + '/password';
-  let pass = document.getElementById('password').value;
-  let payload = JSON.stringify({
-    newPassword: pass
-  });
-  console.log(payload);
-  console.log('ajax (' + url + ')');
-  console.log('at =' + at);
-  console.log("make ajax call");
-  $.ajax({
-      async: "true",
-      url: url,
-      method: method,
-      data:payload,
-      contentType: 'application/vnd.pingidentity.password.reset+json',
-      beforeSend: function(xhr) {
-        xhr.setRequestHeader('Authorization', at);
-      }
-    }).done(function(data) {
-      console.log(data);
-    })
-    .fail(function(data) {
-      console.log('ajax call failed');
-      console.log(data);
-      $('#warningMessage').text(data.responseJSON.details[0].message);
-      $('#warningDiv').show();
-    });
-    console.log("AdminchangePassword finished");
-
-}
-
-function adminGetUser(){
-  //{{apiPath}}/environments/{{envID}}/users/?filter=username%20eq%20%22lsmith%22
-  console.log('adminGetUser called');
-  let method = "GET";
-  let user = document.getElementById('username').value;
-  console.log(user);
-  let at = "Bearer " + Cookies.get("accessToken");
-  let url = apiUrl + "/environments/" + environmentId + "/users/?filter=username%20eq%20%22" + user + "%22";
-  console.log('ajax (' + url + ')');
-  console.log('at =' + at);
-  console.log("make ajax call");
-  $.ajax({
-    async: "true",
-    url: url,
-    method: method,
-    beforeSend: function(xhr) {
-      xhr.setRequestHeader('Authorization', at);
-    }
-  }).done(function(response) {
-    console.log(response);
-    adminSetUserValues(response);
-  });
-  console.log("adminGetUser completed")
-}
-
-function adminSetUserValues(userJson) {
-  console.log("adminsetuserValues was called");
-  console.log(userJson);
-  console.log(userJson._embedded.users[0].id);
-  Cookies.set('currentUser', userJson._embedded.users[0].id);
-  if (Cookies.get("accessToken")) {
-    document.getElementById("user").value = 'Hello ' + userJson._embedded.users[0].username + "!";
-    document.getElementById("fname").value = userJson._embedded.users[0].name.given;
-    document.getElementById("lname").value = userJson._embedded.users[0].name.family;
-    document.getElementById("email").value = userJson._embedded.users[0].email;
-    document.getElementById("username").value = userJson._embedded.users[0].username;
-    //document.getElementById("address").innerHTML=streetAddress;
-  } else {
-    document.getElementById("username").innerHTML = 'Welcome Guest';
-  }
-
-  //let idPayload = parseJwt(idToken);
-}
-
 function getUserValues() {
   console.log('getUserValues called');
   let method = "GET";
@@ -612,20 +452,98 @@ function getAccessToken() {
   console.log("getAccessToken was called");
   let url = authUrl + "/environments/" + environmentId + "/as/token";
   console.log(url);
-  let tok = workerClientId + ':' + workerClientSecret;
+  let tok = clientId + ':' + clientSecret;
   let hash = btoa(tok);
   let auth = "Basic " + hash;
-  let contentType = "application/x-www-form-urlencoded";
   console.log(auth);
-  exJax("POST", url, nextStep, contentType, payload);
+  //let settings =
 
+  $.ajax({
+      async: "true",
+      method: "POST",
+      url: "https://auth.pingone.com/e2431bcc-0d0b-4574-9dbc-ff8c91bb799e/as/token",
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader(
+          "Authorization", "Basic ZGM0M2I0M2UtMWEzZS00ZDFmLWJhY2ItMjgwZGZiNTNlODM1OjBLTWpQSTNZR1Y0Q2JCSH5WRkljLjlqTlJPR3dGQ2Y5T1Fzb216aV9iR3R4WnpraHBKeEdaeUZaOX5oRF9zNUg="
+        )
+      },
+      headers: {
+        "Content-Type": "application/json",
+        //"Authorization": "Basic ZGM0M2I0M2UtMWEzZS00ZDFmLWJhY2ItMjgwZGZiNTNlODM1OjBLTWpQSTNZR1Y0Q2JCSH5WRkljLjlqTlJPR3dGQ2Y5T1Fzb216aV9iR3R4WnpraHBKeEdaeUZaOX5oRF9zNUg=",
+        "cache-control": "no-cache",
+        "access-control-allow-headers": "cache-control, Origin, Authorization",
+        "Access-Control-Allow-Methods": "POST, GET, OPTIONS"
+      },
+      data: {
+        "scope": "openid profile",
+        "grant_type": "client_credentials"
+      },
+      xhrFields: {
+        withCredentials: true
+      }
+    })
+    .done(function(data) {
+      console.log(data);
+    })
+    .fail(function(data) {
+      console.log('ajax call failed');
+      console.log(data);
+      $('#warningMessage').text(data.responseJSON.details[0].message);
+      $('#warningDiv').show();
+    });
+}
+
+function registerUser() {
+  console.log("registerUser was called");
+  let method = "POST";
+  let at = "Bearer " + Cookies.get("accessToken");
+  let url = apiUrl + "/environments/" + environmentId + "/users/" + user;
+  let payload = JSON.stringify({
+    company: $('#user_company').val(),
+    username: $('#user_login').val(),
+    name: {
+      given: $('#fname').val(),
+      family: $('#lname').val()
+    }
+  });
+  console.log(payload);
+  console.log('ajax (' + url + ')');
+  console.log('at =' + at);
+  console.log("make ajax call");
+  $.ajax({
+      async: "true",
+      url: url,
+      method: method,
+      dataType: 'json',
+      contentType: 'application/json',
+      data: payload,
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader('Authorization', at);
+      },
+      xhrFields: {
+        withCredentials: true
+      }
+    }).done(function(data) {
+      console.log(data);
+    })
+    .fail(function(data) {
+      console.log('ajax call failed');
+      console.log(data);
+      $('#warningMessage').text(data.responseJSON.details[0].message);
+      $('#warningDiv').show();
+    });
+
+  //add brief delay so info is populated
+  setTimeout(function() {
+    getUserValues();
+  }, 1000);
 }
 
 
 // exJax function makes an AJAX call
 function exJax(method, url, callback, contenttype, payload) {
   console.log('ajax (' + url + ')');
-  console.log("content type: "+contenttype);
+  console.log("content type: " + contenttype);
   $.ajax({
       url: url,
       method: method,
@@ -707,80 +625,4 @@ function getSubscriptions (userData) {  //will need ot use getUserValues() to ge
   for (var i = 0; i < mySubs.length; i++){
 
   }
-}
-
-/* sendOTPForgetPassword() {
-  console.log('sendOTPForgetPassword called');
-  let payload = JSON.stringify({
-    username: $('#user_login').val()
-  });
-  let url = $('#forgotPasswordURL').val();
-  let contenttype = 'application/vnd.pingidentity.password.forgot+json';
-  console.log(url);
-  exJax('POST', url, nextStep, contenttype, payload);
-}
-
-setForgotPassword(otp, password) {
-  console.log('setForgotPassword called');
-  let payload = JSON.stringify({
-    recoveryCode: $('#otp_reset').val(),
-    newPassword: $('#user_new_pass').val()
-
-  });
-  let url = $('#forgotPasswordURL').val();
-  let contenttype = $('#changePasswordContentType').val();
-  exJax('POST', url, nextStep, contenttype, payload);
-}
-
-*/
-
-//--------Registration -------//
-function registerUser() {
-  console.log("registerUser was called");
-  let method = "POST";
-  let contentType = 'application/vnd.pingidentity.user.register+json';
-  //let url = apiUrl + "/environments/" + environmentId + "/flows/" + flowId;
-  //let url = $('#registerUserUrl').val();
-  let url
-  let payload = JSON.stringify({
-    Attr2: $('#user_company').val(),
-    population: {
-      id: "57ee5904-32f3-4bfe-9504-d40704edeab0"
-    },
-    username: $('#user_login').val(),
-    name: {
-      given: $('#fname').val(),
-      family: $('#lname').val()
-    },
-    phone: $('#user_phoneNumber').val(),
-    password: $('#user_pass').val()
-  });
-  exJax("POST", url, nextStep, contentType, payload);
-
-  //add brief delay so info is populated
-  setTimeout(function() {
-    getUserValues();
-  }, 1000);
-}
-function setpassword(){
-  "value": "{SSHA512}UkGWfORubNKFpFBWh+Lgy4FrciclzUXneuryV+B+zBDR4Gqd5wvMqAvKRixgQWoZlZUgq8Wh40uMK3s6bWpzWt1/TqQH02hX",
-  "forceChange": true
-  console.log("registerUser was called");
-  let method = "POST";
-  let contentType = 'application/vnd.pingidentity.user.register+json';
-  //let url = apiUrl + "/environments/" + environmentId + "/flows/" + flowId;
-  //let url = $('#registerUserUrl').val();
-  let url
-  let payload = JSON.stringify({
-    password: $('#user_pass').val(),
-    forceChange: 'true'
-  });
-  exJax("POST", url, nextStep, contentType, payload);
-
-
-
-}
-
-function redirect_toReg(){
-  location.href = 'https://morganapps.ping-eng.com/myP14CDemo/content/finance/register.html?' + 'environmentId=' + environmentId + '&flowId=' + flowId;
 }
