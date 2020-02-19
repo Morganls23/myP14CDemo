@@ -147,7 +147,6 @@ function nextStep(data) {
       console.log('Rendering Verification code form');
       $('#loginDiv').hide();
       $('#otpDiv').show();
-      $('#verifyUserContentType').val('application/vnd.pingidentity.user.verify+json');
       $('#verifyUserUrl').val(data._links['user.verify'].href);
       break;
     case 'PASSWORD_REQUIRED':
@@ -777,9 +776,9 @@ function verifyUser(){
     otp: $('#otp_login').val()
   });
   //let url = $('#validateOtpUrl').val();
-  let url = $('verifyUserUrl').val();
+  //let url = $('verifyUserUrl').val();
+  let url = authUrl + '/'+ environmentId + '/flows' + flowId;
   let contenttype ='application/vnd.pingidentity.user.verify+json';
-  //$('#validateOtpContentType').val();
   console.log('url :' + url);
   console.log('otp: ' + otp);
   console.log('content' + contenttype);
