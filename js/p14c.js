@@ -409,7 +409,9 @@ function setUserValues(userJson) {
       document.getElementById("user").value = 'Hello ' + userJson.name.given + "!";
       document.getElementById("fname").value = userJson.name.given;
     }
+    if(userJson.name.family!=null){
     document.getElementById("lname").value = userJson.name.family;
+    }
     document.getElementById("email").value = userJson.email;
     document.getElementById("username").value = userJson.username;
     //document.getElementById("address").innerHTML=streetAddress;
