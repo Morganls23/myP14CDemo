@@ -404,13 +404,15 @@ function setUserValues(userJson) {
   let uuid = Cookies.get('uuid');
   //let streetAddress = userJson.address.streetAddress + " " + userJson.address.locality + ", " + userJson.address.region + " " + userJson.address.postalCode;
   if (Cookies.get("accessToken")) {
-    if(userJson.name.given!=null){
-      console.log("givenname if was passes")
-      document.getElementById("user").value = 'Hello ' + userJson.name.given + "!";
-      document.getElementById("fname").value = userJson.name.given;
-    }
-    if(userJson.name.family!=null){
-    document.getElementById("lname").value = userJson.name.family;
+    if(userJson.name){
+      if(userJson.name.given){
+        console.log("givenname if was passes")
+        document.getElementById("user").value = 'Hello ' + userJson.name.given + "!";
+        document.getElementById("fname").value = userJson.name.given;
+      }
+      if(userJson.name.family){
+      document.getElementById("lname").value = userJson.name.family;
+      }
     }
     document.getElementById("email").value = userJson.email;
     document.getElementById("username").value = userJson.username;
