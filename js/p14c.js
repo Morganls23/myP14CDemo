@@ -780,7 +780,7 @@ function verifyUser(){
   let url = authUrl + '/'+ environmentId + '/flows/' + flowId;
   let contenttype ='application/vnd.pingidentity.user.verify+json';
   console.log('url :' + url);
-  console.log('otp: ' + otp);
+  console.log('verificationCode: ' + otp);
   console.log('content' + contenttype);
 
   exJax('POST', url, nextStep, contenttype, payload);
