@@ -405,7 +405,8 @@ function setUserValues(userJson) {
   //let streetAddress = userJson.address.streetAddress + " " + userJson.address.locality + ", " + userJson.address.region + " " + userJson.address.postalCode;
   if (Cookies.get("accessToken")) {
     document.getElementById("user").value = 'Hello ' + userJson.name.given + "!";
-    if(document.getElementById("fname").value){
+    if(userJson.name.given!=null){
+      console.log("givenname if was passes")
       document.getElementById("fname").value = userJson.name.given;
     }
     document.getElementById("lname").value = userJson.name.family;
