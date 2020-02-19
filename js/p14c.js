@@ -773,7 +773,7 @@ function verifyUser(){
   console.log('verifyUser called');
   let otp = $('#otp_login').val();
   let payload = JSON.stringify({
-    otp: $('#otp_login').val()
+    verificationCode: $('#otp_login').val()
   });
   //let url = $('#validateOtpUrl').val();
   //let url = $('verifyUserUrl').val();
