@@ -663,9 +663,9 @@ function updateMFA(){
     $.ajax({
         async: "true",
         url: url,
-        method: method,
+        method: 'PUT',
         dataType: 'json',
-        contentType: 'application/vnd.pingidentity.device.activate+json',
+        contentType: 'application/json',
         data: payload,
         beforeSend: function(xhr) {
           xhr.setRequestHeader('Authorization', at);
