@@ -665,7 +665,7 @@ function updateMFA(){
         url: url,
         method: method,
         dataType: 'json',
-        contentType: 'application/json',
+        contentType: 'application/vnd.pingidentity.device.activate+json',
         data: payload,
         beforeSend: function(xhr) {
           xhr.setRequestHeader('Authorization', at);
