@@ -622,6 +622,71 @@ function updateUser() {
 
 }
 
+function updateMFA(){
+  onsole.log("updateMFA was called");
+  let method = "POST";
+  let user = Cookies.get("uuid");
+  let at = "Bearer " + Cookies.get("accessToken");
+  let url = apiUrl + "/environments/" + environmentId + "/users/" + user + 'devices';
+  let payload = JSON.stringify({
+    type: 'SMS',
+    phone: $('#device').val()
+  });
+  console.log(payload);
+  console.log('ajax (' + url + ')');
+  console.log('at =' + at);
+  console.log("make ajax call");
+  $.ajax({
+      async: "true",
+      url: url,
+      method: method,
+      dataType: 'json',
+      contentType: 'application/json',
+      data: payload,
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader('Authorization', at);
+      }
+    }).done(function(data) {
+      console.log(data);
+    })
+    .fail(function(data) {
+      console.log('ajax call failed');
+      console.log(data);
+      $('#warningMessage').text(data.responseJSON.details[0].message);
+      $('#warningDiv').show();
+    });
+
+    console.log('enableMFA');
+    let payloadEnable = JSON.stringify({
+      mfaEnabled: 'true',
+    });
+    $.ajax({
+        async: "true",
+        url: url,
+        method: PUT,
+        dataType: 'json',
+        contentType: 'application/json',
+        data: payload,
+        beforeSend: function(xhr) {
+          xhr.setRequestHeader('Authorization', at);
+        }
+      }).done(function(data) {
+        console.log(data);
+      })
+      .fail(function(data) {
+        console.log('ajax call failed');
+        console.log(data);
+        $('#warningMessage').text(data.responseJSON.details[0].message);
+        $('#warningDiv').show();
+      });
+
+  //add brief delay so info is populated
+  setTimeout(function() {
+    getUserValues();
+  }, 1000);
+}
+
+
 function getAccessToken() {
   console.log("getAccessToken was called");
   let url = authUrl + "/environments/" + environmentId + "/as/token";

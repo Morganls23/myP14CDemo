@@ -116,9 +116,19 @@
 
                                                             <label for="Email">Email</label>
                                                             <input name="email" id="email">
+
                                                             <a class="button button_theme" onclick="updateUser();">Update Profile</a>
                                                             <input type="hidden" name="redirect_to" value="#" />
                                                       </form>
+                                                      <form class="form-inline" name="updateMFAForm" id="updateMFAForm" action="#" method="post">
+
+                                                      <label for="mfa">Opt in to MFA?</label>
+                                                      <input name="mfa" id="mfa">
+
+                                                      <label for="device">Phone Numnber</label>
+                                                      <input name="device" id="device">
+                                                      <a class="button button_theme" onclick="updateMFA();">Update MFA</a>
+                                                    </form>
 
                                                 </div>
                                             </div>
