@@ -623,7 +623,7 @@ function updateUser() {
 }
 
 function updateMFA(){
-  onsole.log("updateMFA was called");
+  console.log("updateMFA was called");
   let method = "POST";
   let user = Cookies.get("uuid");
   let at = "Bearer " + Cookies.get("accessToken");
