@@ -663,7 +663,7 @@ function updateMFA(){
     $.ajax({
         async: "true",
         url: url,
-        method: PUT,
+        method: method,
         dataType: 'json',
         contentType: 'application/json',
         data: payload,
