@@ -636,8 +636,26 @@ function getMFADevices(){
   let method = "GET";
   let url = apiUrl + "/environments/" + environmentId + "/users/" + user +"/devices";
   console.log('url:' + url);
-  let devices = exJax("GET", url);
-  console.log("devices is" + devices);
+//  let devices = exJax("GET", url);
+$.ajax({
+    async: "true",
+    url: url,
+    method: GET,
+    dataType: 'json',
+    contentType: 'application/json',
+    beforeSend: function(xhr) {
+      xhr.setRequestHeader('Authorization', at);
+    }
+  }).done(function(data) {
+    console.log(data);
+  })
+  .fail(function(data) {
+    console.log('ajax call failed');
+    console.log(data);
+    $('#warningMessage').text(data.responseJSON.details[0].message);
+    $('#warningDiv').show();
+  });
+
 }
 
 function updateMFA(){
