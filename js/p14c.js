@@ -112,6 +112,11 @@ function validatePassword() {
   exJax('POST', url, nextStep, contenttype, payload);
 }
 
+//seturl for social
+function redirect_toSocial(){
+  location.href = $('#socialLoginUrl').val();
+}
+
 // validate one time passcode function
 function validateOtp() {
   console.log('validateOtp called');
