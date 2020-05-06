@@ -142,6 +142,7 @@ function nextStep(data) {
       $('#validatePasswordUrl').val(data._links['usernamePassword.check'].href);
       $('#validatePasswordContentType').val('application/vnd.pingidentity.usernamePassword.check+json');
       $('#registerUserUrl').val(data._links['user.register'].href);
+      $('#socialLoginUrl').val(data._embedded.socialProviders[0]._links.authenticate.href');
       break;
     case 'VERIFICATION_CODE_REQUIRED':
       console.log('Rendering Verification code form');
