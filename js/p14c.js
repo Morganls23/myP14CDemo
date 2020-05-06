@@ -630,9 +630,9 @@ function updateUser() {
 
 
 //MFA stuff
-function getMFADevices(){
+function getMFADevices(user){
   console.log("getMFADevices was called");
-  let user = Cookies.get("uuid");
+  let user =Cookies.get('uuid');
   let method = "GET";
   let url = apiUrl + "/environments/" + environmentId + "/users/" + user +"/devices";
   console.log('url:' + url);
@@ -748,7 +748,7 @@ function exJax(method, url, callback, contenttype, payload) {
 }
 
 function getAllUsers() {
-  console.log("getUserValues called");
+  console.log("getAllUsers called");
   let method = "GET";
   let at = "Bearer " + Cookies.get("accessToken");
   let url = apiUrl + "/environments/" + environmentId + "/users";
@@ -772,7 +772,7 @@ function getAllUsers() {
       $('#warningMessage').text(data.responseJSON.details[0].message);
       $('#warningDiv').show();
     });
-  console.log("getUserValues completed")
+  console.log("getAllUsers completed")
 }
 
 function populateTable (json) {

@@ -325,7 +325,7 @@ $(document).ready(function () {
   if (Cookies.get('accessToken')) {
     setUserinfoCookie();
     getUserValues(Cookies.get('uuid'));
-    getMFADevices();
+    getMFADevices(Cookies.get('uuid'));
   }
   else {
     window.location.href=authorizationUrl;
