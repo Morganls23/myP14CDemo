@@ -637,7 +637,7 @@ function getMFADevices(){
   let url = apiUrl + "/environments/" + environmentId + "/users/" + user +"/devices";
   console.log('url:' + url);
   let devices = exJax("GET", url);
-  console.log("devices is" devices);
+  console.log("devices is" + devices);
 }
 
 function updateMFA(){
