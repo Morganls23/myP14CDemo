@@ -628,6 +628,18 @@ function updateUser() {
 
 }
 
+
+//MFA stuff
+function getMFADevices(){
+  console.log("getMFADevices was called");
+  let user = Cookies.get("currentUser");
+  let method = "GET";
+  let url = apiUrl + "/environments/" + environmentId + "/users/" + user +"/devices";
+  console.log('url:' + url);
+  let devices = exJax("GET");
+  console.log(devices);
+}
+
 function updateMFA(){
   console.log("updateMFA was called");
   let method = "POST";
@@ -691,6 +703,9 @@ function updateMFA(){
     getUserValues();
   }, 1000);
 }
+
+
+
 
 
 function getAccessToken() {
