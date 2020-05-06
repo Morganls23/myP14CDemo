@@ -632,12 +632,12 @@ function updateUser() {
 //MFA stuff
 function getMFADevices(){
   console.log("getMFADevices was called");
-  let user = Cookies.get("currentUser");
+  let user = Cookies.get("uuid");
   let method = "GET";
   let url = apiUrl + "/environments/" + environmentId + "/users/" + user +"/devices";
   console.log('url:' + url);
-  let devices = exJax("GET");
-  console.log(devices);
+  let devices = exJax("GET", url);
+  console.log("devices is" devices);
 }
 
 function updateMFA(){
