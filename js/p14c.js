@@ -640,7 +640,7 @@ function getMFADevices(){
 $.ajax({
     async: "true",
     url: url,
-    method: GET,
+    method: 'GET',
     dataType: 'json',
     contentType: 'application/json',
     beforeSend: function(xhr) {
