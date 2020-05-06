@@ -132,6 +132,28 @@
                                                   -->
 
                                                 </div>
+                                                <div class="inside">
+                                                    <h3 class="hrmargin_0" id="mfa"></h3>
+                                                    <br/>
+                                                      <form class="form-inline" name="updateUserForm" id="updateUserForm" action="#" method="post">
+                                                            <label for="Devices">Devices</label>
+                                                            <input name="Devices" id="Devices" readonly>
+
+                                                            <a class="button button_theme" onclick="updateUser();">Update Profile</a>
+                                                            <input type="hidden" name="redirect_to" value="#" />
+                                                      </form>
+                                                    <!--  <form class="form-inline" name="updateMFAForm" id="updateMFAForm" action="#" method="post">
+
+                                                      <label for="mfa">Opt in to MFA?</label>
+                                                      <input name="mfa" id="mfa">
+
+                                                      <label for="device">Phone Numnber</label>
+                                                      <input name="device" id="device">
+                                                      <a class="button button_theme" onclick="updateMFA();">Update MFA</a>
+                                                    </form>
+                                                  -->
+
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -303,6 +325,7 @@ $(document).ready(function () {
   if (Cookies.get('accessToken')) {
     setUserinfoCookie();
     getUserValues(Cookies.get('uuid'));
+    getMFADevices();
   }
   else {
     window.location.href=authorizationUrl;
