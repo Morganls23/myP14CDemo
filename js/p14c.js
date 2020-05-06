@@ -630,7 +630,7 @@ function updateUser() {
 
 
 //MFA stuff
-function getMFADevices(user){
+function getMFADevices(){
   console.log("getMFADevices was called");
   let user =Cookies.get('uuid');
   let method = "GET";
