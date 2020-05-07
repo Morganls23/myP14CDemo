@@ -169,6 +169,12 @@ function nextStep(data) {
       $('#validateOtpUrl').val(data._links['otp.check'].href);
       $('#validateOtpContentType').val('application/vnd.pingidentity.otp.check+json')
       break;
+    case "PUSH_CONFIRMATION_REQUIRED":
+      console.log('Rendering wait for push form');
+      $('#loginDiv').hide();
+      $('#pushDiv').show();
+      $('#pushResumeUrl').val(data.resumeUrl.href);
+      break;
     case 'MUST_CHANGE_PASSWORD':
       console.log('Rendering password form');
       $('#loginDiv').hide();
