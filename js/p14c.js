@@ -317,7 +317,7 @@ function renderDivState() {
     let push = document.getElementById("pushDiv");
     login.style.display = "none";
 
-    et changePassword = document.getElementById("changePasswordDiv");
+    let changePassword = document.getElementById("changePasswordDiv");
     login.style.display = "none";
 
     let account = document.getElementById("myAccount");
