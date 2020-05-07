@@ -88,8 +88,8 @@ function exJax(method, url, callback, contenttype, payload) {
 function changePassword() {
   console.log('changePassword called');
   let payload = JSON.stringify({
-    currentPassword: $('#password').val(),
-    newPassword: $('#changePassword').val()
+    currentPassword: $('#current_password').val(),
+    newPassword: $('#new_password').val()
   });
   let url = $('#changePasswordUrl').val();
   let contenttype = $('#changePasswordContentType').val();
@@ -144,6 +144,8 @@ function nextStep(data) {
       console.log('Rendering login form');
       $('#loginDiv').show();
       $('#otpDiv').hide();
+      $('#pushDiv').hide();
+      $('#changePasswordDiv').hide();
       $('#validatePasswordUrl').val(data._links['usernamePassword.check'].href);
       $('#validatePasswordContentType').val('application/vnd.pingidentity.usernamePassword.check+json');
       $('#registerUserUrl').val(data._links['user.register'].href);
@@ -153,12 +155,16 @@ function nextStep(data) {
       console.log('Rendering Verification code form');
       $('#loginDiv').hide();
       $('#otpDiv').show();
+      $('#pushDiv').hide();
+      $('#changePasswordDiv').hide();
       $('#verifyUserUrl').val(data._links['user.verify'].href);
       break;
     case 'PASSWORD_REQUIRED':
       console.log('Rendering login form');
       $('#loginDiv').show();
       $('#otpDiv').hide();
+      $('#pushDiv').hide();
+      $('#changePasswordDiv').hide();
       $('#validatePasswordUrl').val(data._embedded.requiredStep._links['usernamePassword.check'].href);
       $('#validatePasswordContentType').val('application/vnd.pingidentity.usernamePassword.check+json');
       break;
@@ -166,19 +172,25 @@ function nextStep(data) {
       console.log('Rendering otp form');
       $('#loginDiv').hide();
       $('#otpDiv').show();
+      $('#pushDiv').hide();
+      $('#changePasswordDiv').hide();
       $('#validateOtpUrl').val(data._links['otp.check'].href);
       $('#validateOtpContentType').val('application/vnd.pingidentity.otp.check+json')
       break;
     case "PUSH_CONFIRMATION_REQUIRED":
       console.log('Rendering wait for push form');
       $('#loginDiv').hide();
+      $('#otpDiv').hide();
       $('#pushDiv').show();
+      $('#changePasswordDiv').hide();
       $('#pushResumeUrl').val(data.resumeUrl.href);
       break;
     case 'MUST_CHANGE_PASSWORD':
       console.log('Rendering password form');
       $('#loginDiv').hide();
-      $('#passwordDiv').show();
+      $('#otpDiv').hide();
+      $('#pushDiv').hide();
+      $('#changePasswordDiv').show();
       $('#changePasswordUrl').val(data._links['password.reset'].href);
       $('#changePasswordContentType').val('application/vnd.pingidentity.password.reset+json')
       break;
