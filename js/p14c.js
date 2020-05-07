@@ -319,7 +319,7 @@ function renderDivState() {
 
     et changePassword = document.getElementById("changePasswordDiv");
     login.style.display = "none";
-    
+
     let account = document.getElementById("myAccount");
     account.style.display = "none";
   }
