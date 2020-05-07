@@ -292,6 +292,12 @@ function renderDivState() {
     let otp = document.getElementById("otpDiv");
     otp.style.display = "none";
 
+    let push = document.getElementById("pushDiv");
+    login.style.display = "none";
+
+    let changePassword = document.getElementById("changePasswordDiv");
+    login.style.display = "none";
+
     let account = document.getElementById("myAccount");
     account.style.display = "block";
 
