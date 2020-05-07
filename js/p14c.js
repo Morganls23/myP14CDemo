@@ -196,6 +196,10 @@ function nextStep(data) {
       break;
     case 'COMPLETED':
       console.log('completed authentication successfully');
+      $('#loginDiv').hide();
+      $('#otpDiv').hide();
+      $('#pushDiv').hide();
+      $('#changePasswordDiv').hide();
       $('#warningMessage').text('');
       $('#warningDiv').hide();
       console.log('Redirecting user');
