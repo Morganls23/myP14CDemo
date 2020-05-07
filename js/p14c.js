@@ -198,6 +198,10 @@ function nextStep(data) {
       console.log('completed authentication successfully');
       $('#warningMessage').text('');
       $('#warningDiv').hide();
+      $('#loginDiv').hide();
+      $('#otpDiv').hide();
+      $('#pushDiv').hide();
+      $('#changePasswordDiv').hide();
       console.log('Redirecting user');
       console.log(data);
       window.location.replace(data.resumeUrl);
