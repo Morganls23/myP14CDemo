@@ -297,15 +297,14 @@ function renderDivState() {
     otp.style.display = "none";
 
     let push = document.getElementById("pushDiv");
-    login.style.display = "none";
+    push.style.display = "none";
 
     let changePassword = document.getElementById("changePasswordDiv");
-    login.style.display = "none";
+    changePassword.style.display = "none";
 
     let account = document.getElementById("myAccount");
     account.style.display = "block";
 
-    //otpDiv
 
   } else {
     let login = document.getElementById("loginDiv");
