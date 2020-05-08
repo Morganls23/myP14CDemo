@@ -93,6 +93,7 @@ function changePassword() {
   });
   let url = $('#changePasswordUrl').val();
   let contenttype = 'application/vnd.pingidentity.password.reset+json';
+  console.out('payload '+ payload);
   exJax('POST', url, nextStep, contenttype, payload);
 }
 
