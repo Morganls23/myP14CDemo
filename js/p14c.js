@@ -472,29 +472,17 @@ function resetPassword(){
   console.log("resetPassword was called");
   let method = "POST";
   let user = $('#user_login').val();
-  let at = "Bearer " + Cookies.get("accessToken");
   let url = $('#forgotPasswordURL').val();
-  console.log('ajax (' + url + ')');
-  console.log('at =' + at);
-  console.log("make ajax call");
-  $.ajax({
-      async: "true",
-      url: url,
-      method: method,
-      contentType: 'application/vnd.pingidentity.password.sendRecoveryCode+json',
-      beforeSend: function(xhr) {
-        xhr.setRequestHeader('Authorization', at);
-      }
-    }).done(function(data) {
-      console.log(data);
-    })
-    .fail(function(data) {
-      console.log('ajax call failed');
-      console.log(data);
-      $('#warningMessage').text(data.responseJSON.details[0].message);
-      $('#warningDiv').show();
-    });
-    console.log("resetPassword finished");
+  let contentType='application/vnd.pingidentity.password.forgot+json';
+  console.log('url (' + url + ')');
+  console.log('user =' + user);
+  console.log("make exJax call");
+  let payload = JSON.stringify({
+    username: pass
+  });
+  exJax("POST", url, contentType, payload);
+
+  console.log("resetPassword finished");
 }
 
 
