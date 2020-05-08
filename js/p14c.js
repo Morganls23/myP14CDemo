@@ -87,9 +87,10 @@ function exJax(method, url, callback, contenttype, payload) {
 // change password function
 function changePassword() {
   console.log('changePassword called');
+  let newpass = $('new_password').val();
   let payload = JSON.stringify({
     currentPassword: $('#current_password').val(),
-    newPassword: $('#new_password').val()
+    newPassword: newpass
   });
   let url = $('#changePasswordUrl').val();
   let contenttype = 'application/vnd.pingidentity.password.reset+json';
