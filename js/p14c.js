@@ -511,7 +511,7 @@ function validatePWResetCode(){
   let method = "POST";
   let pwresetcode = $('#pwReset_Code').val();
   let newpwd =$('new_password').val();
-  let url = $('#pwcodeUrl').val();
+  let url = $('#changePasswordUrl').val();
   let contentType='application/vnd.pingidentity.password.recover+json';
   console.log('url (' + url + ')');
   console.log("make exJax call");
