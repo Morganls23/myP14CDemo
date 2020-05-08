@@ -190,7 +190,7 @@ function nextStep(data) {
       $('#pushDiv').show();
       $('#pwResetCodeDiv').hide();
       $('#changePasswordDiv').hide();
-      $('#pushResumeUrl').val(data.resumeUrl.href);
+      $('#pushResumeUrl').val(data._links["device.select"].href);
       break;
     case 'MUST_CHANGE_PASSWORD':
       console.log('Rendering password form');
