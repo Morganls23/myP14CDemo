@@ -146,6 +146,7 @@ function nextStep(data) {
       $('#otpDiv').hide();
       $('#pushDiv').hide();
       $('#changePasswordDiv').hide();
+      $('#pwResetCodeDiv').hide();
       $('#validatePasswordUrl').val(data._links['usernamePassword.check'].href);
       $('#validatePasswordContentType').val('application/vnd.pingidentity.usernamePassword.check+json');
       $('#registerUserUrl').val(data._links['user.register'].href);
@@ -157,6 +158,7 @@ function nextStep(data) {
       $('#loginDiv').hide();
       $('#otpDiv').show();
       $('#pushDiv').hide();
+      $('#pwResetCodeDiv').hide();
       $('#changePasswordDiv').hide();
       $('#verifyUserUrl').val(data._links['user.verify'].href);
       break;
