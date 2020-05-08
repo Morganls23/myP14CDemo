@@ -136,9 +136,9 @@ function validateOtp() {
   exJax('POST', url, nextStep, contenttype, payload);
 }
 
-function continue_push(){
-  location.href=authUrl + '/' + environmentId + '/flows/' + flowId;
-  //location.href = $('#pushResumeUrl').val();
+function continue_push() {
+  //location.href=authUrl + '/' + environmentId + '/flows/' + flowId;
+  location.href = $('#pushResumeUrl').val();
 }
 
 function nextStep(data) {
