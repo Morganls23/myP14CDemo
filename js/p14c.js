@@ -165,6 +165,7 @@ function nextStep(data) {
       $('#loginDiv').show();
       $('#otpDiv').hide();
       $('#pushDiv').hide();
+      $('#pwResetCodeDiv').hide();
       $('#changePasswordDiv').hide();
       $('#validatePasswordUrl').val(data._embedded.requiredStep._links['usernamePassword.check'].href);
       $('#validatePasswordContentType').val('application/vnd.pingidentity.usernamePassword.check+json');
@@ -174,15 +175,17 @@ function nextStep(data) {
       $('#loginDiv').hide();
       $('#otpDiv').show();
       $('#pushDiv').hide();
+      $('#pwResetCodeDiv').hide();
       $('#changePasswordDiv').hide();
       $('#validateOtpUrl').val(data._links['otp.check'].href);
       $('#validateOtpContentType').val('application/vnd.pingidentity.otp.check+json')
       break;
-    case "PUSH_CONFIRMATION_REQUIRED":
+    case 'PUSH_CONFIRMATION_REQUIRED':
       console.log('Rendering wait for push form');
       $('#loginDiv').hide();
       $('#otpDiv').hide();
       $('#pushDiv').show();
+      $('#pwResetCodeDiv').hide();
       $('#changePasswordDiv').hide();
       $('#pushResumeUrl').val(data.resumeUrl.href);
       break;
@@ -191,7 +194,18 @@ function nextStep(data) {
       $('#loginDiv').hide();
       $('#otpDiv').hide();
       $('#pushDiv').hide();
+      $('#pwResetCodeDiv').hide();
       $('#changePasswordDiv').show();
+      $('#changePasswordUrl').val(data._links['password.reset'].href);
+      $('#changePasswordContentType').val('application/vnd.pingidentity.password.reset+json')
+      break;
+    case 'RECOVERY_CODE_REQUIRED':
+    console.log('Rendering password form');
+      $('#loginDiv').hide();
+      $('#otpDiv').hide();
+      $('#pushDiv').hide();
+      $('#changePasswordDiv').hide();
+      $('#pwResetCodeDiv').show();
       $('#changePasswordUrl').val(data._links['password.reset'].href);
       $('#changePasswordContentType').val('application/vnd.pingidentity.password.reset+json')
       break;
@@ -201,6 +215,7 @@ function nextStep(data) {
       $('#otpDiv').hide();
       $('#pushDiv').hide();
       $('#changePasswordDiv').hide();
+      $('#pwResetCodeDiv').hide();
       $('#warningMessage').text('');
       $('#warningDiv').hide();
       console.log('Redirecting user');
@@ -299,6 +314,9 @@ function renderDivState() {
 
     let push = document.getElementById("pushDiv");
     push.style.display = "none";
+
+    let resetpass = document.getElementById("pwResetCodeDiv");
+    resetpass.style.display = "none";
 
     let changePassword = document.getElementById("changePasswordDiv");
     changePassword.style.display = "none";
@@ -472,7 +490,7 @@ function resetPassword(){
   console.log("resetPassword was called");
   let method = "POST";
   let user = $('#user_login').val();
-  let url = $('#validatePasswordUrl').val();
+  let url = $('#forgotPasswordURL').val();
   let contentType='application/vnd.pingidentity.password.forgot+json';
   console.log('url (' + url + ')');
   console.log('user =' + user);
@@ -482,6 +500,11 @@ function resetPassword(){
   });
   exJax(method, url, nextStep, contentType, payload);
   console.log("resetPassword finished");
+}
+
+
+function validatePWResetCode(){
+
 }
 
 
