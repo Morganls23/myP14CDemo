@@ -149,6 +149,7 @@ function nextStep(data) {
       $('#validatePasswordUrl').val(data._links['usernamePassword.check'].href);
       $('#validatePasswordContentType').val('application/vnd.pingidentity.usernamePassword.check+json');
       $('#registerUserUrl').val(data._links['user.register'].href);
+      $('#forgotPasswordURL').val(data._links'[password.forgot'].href);
       $('#socialLoginUrl').val(data._embedded.socialProviders[0]._links.authenticate.href);
       break;
     case 'VERIFICATION_CODE_REQUIRED':
@@ -183,7 +184,7 @@ function nextStep(data) {
       $('#otpDiv').hide();
       $('#pushDiv').show();
       $('#changePasswordDiv').hide();
-      $('#pushResumeUrl').val(data.resumeUrl.href);
+      $('#pushResumeUrl').val(data.['resumeUrl.href'].href);
       break;
     case 'MUST_CHANGE_PASSWORD':
       console.log('Rendering password form');
@@ -470,9 +471,9 @@ function resetPassword(){
   //https://api.pingone.com/v1/environments/7334523a-4a2d-4dd6-9f37-93c60114e938/users/bfd0e265-abe6-41c9-aca6-2352478b30da/password
   console.log("resetPassword was called");
   let method = "POST";
-  let user = Cookies.get("currentUser");
+  let user = $('#user_login').val();
   let at = "Bearer " + Cookies.get("accessToken");
-  let url = apiUrl + "/environments/" + environmentId + "/users/" + user + '/password';
+  let url = $('#forgotPasswordURL').val();
   console.log('ajax (' + url + ')');
   console.log('at =' + at);
   console.log("make ajax call");
