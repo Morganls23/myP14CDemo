@@ -120,7 +120,7 @@ function redirect_toSocial(){
 
 //seturl for partner
 function redirect_toPartner(){
-  location.href = $('#partner').val();
+  location.href = $('#partnerLoginUrl').val();
 }
 
 // validate one time passcode function
