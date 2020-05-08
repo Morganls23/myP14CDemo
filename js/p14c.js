@@ -137,7 +137,8 @@ function validateOtp() {
 }
 
 function continue_push(){
-  location.href = $('#pushResumeUrl').val();
+  location.href=authUrl + '/' + environmentId + '/flows/' + flowId;
+  //location.href = $('#pushResumeUrl').val();
 }
 
 function nextStep(data) {
