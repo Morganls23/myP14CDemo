@@ -209,6 +209,7 @@ function nextStep(data) {
       $('#changePasswordDiv').hide();
       $('#pwResetCodeDiv').show();
       $('#changePasswordUrl').val(data._links['password.reset'].href);
+      $('#pwcodeUrl').val(data._links['password.recover'].href);
       $('#changePasswordContentType').val('application/vnd.pingidentity.password.reset+json')
       break;
     case 'COMPLETED':
@@ -506,6 +507,21 @@ function resetPassword(){
 
 
 function validatePWResetCode(){
+  console.log("validate password code called ")
+  let method = "POST";
+  let pwresetcode = $('#pwReset_Code').val();
+  let newpwd =$('new_password').val();
+  let url = $('#pwcodeUrl').val();
+  let contentType='application/vnd.pingidentity.password.recover+json';
+  console.log('url (' + url + ')');
+  console.log('user =' + user);
+  console.log("make exJax call");
+  let payload = JSON.stringify({
+    recoveryCode: pwresetcode,
+    newPassword: newpwd
+  });
+  exJax(method, url, nextStep, contentType, payload);
+  console.log("validate Password code finished");
 
 }
 

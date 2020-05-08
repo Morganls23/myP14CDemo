@@ -195,12 +195,19 @@
                                                                                         <form name="pwResetCodeform" id="pwResetCodeform" action="#" method="post">
                                                                                             <p class="login-password">
                                                                                                 <label for="pwReset_Code">Enter your Code</label>
-                                                                                                <input type="text" name="otp" id="otp_login" class="input" value="" size="20" />
+                                                                                                <input type="text" name="pwReset_Code" id="pwReset_Code" class="input" value="" size="20" />
+                                                                                            </p>
+                                                                                            <p class="login-password">
+                                                                                                <label for="pwReset_Code">Enter your New Password</label>
+                                                                                                <input type="text" name="new_password" id="new_password" class="input" value="" size="20" />
                                                                                             </p>
 
                                                                                             <br/>
                                                                                             <div class="mfn-login" style="display: none;">
                                                                                                 <input type="text" class="form-control" name="forgotPasswordURL" id="forgotPasswordURL" readonly />
+                                                                                            </div>
+                                                                                            <div class="mfn-login" style="display: none;">
+                                                                                                <input type="text" class="form-control" name="pwcodeUrl" id="pwcodeUrl" readonly />
                                                                                             </div>
 
                                                                                             <p class="login-submit">
