@@ -580,7 +580,7 @@ function adminGetUser(){
       xhr.setRequestHeader('Authorization', at);
     }
   }).done(function(response) {
-    console.log(response);
+    console.log('response '+response);
     adminSetUserValues(response);
   });
   console.log("adminGetUser completed")
