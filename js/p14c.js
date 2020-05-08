@@ -514,12 +514,12 @@ function validatePWResetCode(){
   let url = $('#pwcodeUrl').val();
   let contentType='application/vnd.pingidentity.password.recover+json';
   console.log('url (' + url + ')');
-  console.log('user =' + user);
   console.log("make exJax call");
   let payload = JSON.stringify({
     recoveryCode: pwresetcode,
     newPassword: newpwd
   });
+    console.log('payload =' + payload);
   exJax(method, url, nextStep, contentType, payload);
   console.log("validate Password code finished");
 
