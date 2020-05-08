@@ -517,7 +517,7 @@ function validatePWResetCode(){
   console.log("make exJax call");
   let payload = JSON.stringify({
     recoveryCode: $('#pwresetcode').val(),
-    newPassword: $('#newpwd').val(),
+    newPassword: $('#newpwd').val()
   });
     console.log('payload =' + payload);
   exJax(method, url, nextStep, contentType, payload);
