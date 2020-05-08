@@ -120,6 +120,9 @@ function redirect_toSocial(){
 
 //seturl for partner
 function redirect_toPartner(){
+  console.log('redirect to partner was called');
+  console.log('usr is ' +$('#partnerLoginUrl').val());
+
   location.href = $('#partnerLoginUrl').val();
 }
 
