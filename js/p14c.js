@@ -142,7 +142,7 @@ function continue_push() {
   let url = $('#pushResumeUrl');
   let contenttype ='application/json';
   //location.href = $('#pushResumeUrl').val();
-  exJax('GET', url, nextStep, contenttype, payload);
+  exJax('GET', url, nextStep, contenttype);
 }
 
 function nextStep(data) {
