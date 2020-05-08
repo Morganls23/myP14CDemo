@@ -511,13 +511,13 @@ function validatePWResetCode(){
   let method = "POST";
   let pwresetcode = $('#pwReset_Code').val();
   let newpwd =$('new_password').val();
-  let url = $('#changePasswordUrl').val();
+  let url = $('#pwcodeUrl').val();
   let contentType='application/vnd.pingidentity.password.recover+json';
   console.log('url (' + url + ')');
   console.log("make exJax call");
   let payload = JSON.stringify({
-    recoveryCode: pwresetcode,
-    newPassword: newpwd
+    recoveryCode: $('#pwresetcode').val(),
+    newPassword: $('#newpwd').val(),
   });
     console.log('payload =' + payload);
   exJax(method, url, nextStep, contentType, payload);
