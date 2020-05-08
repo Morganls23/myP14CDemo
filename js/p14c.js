@@ -118,6 +118,11 @@ function redirect_toSocial(){
   location.href = $('#socialLoginUrl').val();
 }
 
+//seturl for partner
+function redirect_toPartner(){
+  location.href = $('#partner').val();
+}
+
 // validate one time passcode function
 function validateOtp() {
   console.log('validateOtp called');
@@ -164,6 +169,7 @@ function nextStep(data) {
       $('#registerUserUrl').val(data._links['user.register'].href);
       $('#forgotPasswordURL').val(data._links["password.forgot"].href);
       $('#socialLoginUrl').val(data._embedded.socialProviders[0]._links.authenticate.href);
+      $('#partnerLoginUrl').val(data._embedded.socialProviders[1]._links.authenticate.href);
       break;
     case 'VERIFICATION_CODE_REQUIRED':
       console.log('Rendering Verification code form');
