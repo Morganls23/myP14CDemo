@@ -136,6 +136,10 @@ function validateOtp() {
   exJax('POST', url, nextStep, contenttype, payload);
 }
 
+function continue_push(){
+  location.href = $('#pushResumeUrl').val();
+}
+
 function nextStep(data) {
   status = data.status;
   console.log('Parsing json to determine next step: ' + status);
