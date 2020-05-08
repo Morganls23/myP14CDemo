@@ -480,7 +480,7 @@ function resetPassword(){
   let payload = JSON.stringify({
     username: user
   });
-  exJax(method, url, url, contentType, payload);
+  exJax(method, url, nextStep, contentType, payload);
   console.log("resetPassword finished");
 }
 
