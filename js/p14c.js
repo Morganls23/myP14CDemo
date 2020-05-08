@@ -472,7 +472,7 @@ function resetPassword(){
   console.log("resetPassword was called");
   let method = "POST";
   let user = $('#user_login').val();
-  let url = $('#validatePasswordUrl').val();
+  let url = $('#forgotPasswordURL').val();
   let contentType='application/vnd.pingidentity.password.forgot+json';
   console.log('url (' + url + ')');
   console.log('user =' + user);
