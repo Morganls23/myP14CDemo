@@ -184,7 +184,7 @@ function nextStep(data) {
       $('#otpDiv').hide();
       $('#pushDiv').show();
       $('#changePasswordDiv').hide();
-      $('#pushResumeUrl').val(data.['resumeUrl.href'].href);
+      $('#pushResumeUrl').val(data.['resumeUrl'].href);
       break;
     case 'MUST_CHANGE_PASSWORD':
       console.log('Rendering password form');
