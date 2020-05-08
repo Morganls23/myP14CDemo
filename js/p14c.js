@@ -89,7 +89,7 @@ function changePassword() {
   console.log('changePassword called');
   let payload = JSON.stringify({
     currentPassword: $('#current_password').val(),
-    newPassword: $('#new_password').val()
+    newPassword: $("#new_password").val()
   });
   let url = $('#changePasswordUrl').val();
   let contenttype = 'application/vnd.pingidentity.password.reset+json';
