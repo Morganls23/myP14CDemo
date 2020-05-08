@@ -509,15 +509,13 @@ function resetPassword(){
 function validatePWResetCode(){
   console.log("validate password code called ")
   let method = "POST";
-  let pwresetcode = $('#pwReset_Code').val();
-  let newpwd =$('#new_password').val();
   let url = $('#forgotPasswordURL').val();
   let contentType='application/vnd.pingidentity.password.recover+json';
   console.log('url (' + url + ')');
   console.log("make exJax call");
   let payload = JSON.stringify({
-    recoveryCode: $('#pwresetcode').val(),
-    newPassword: $('#newpwd').val()
+    recoveryCode: $('#pwReset_Code').val(),
+    newPassword: $('#new_password').val()
   });
     console.log('payload =' + payload);
   exJax(method, url, nextStep, contentType, payload);
