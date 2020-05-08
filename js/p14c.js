@@ -140,7 +140,7 @@ function continue_push() {
   //location.href=authUrl + '/' + environmentId + '/flows/' + flowId;
   console.log('continue push called');
   let url = $('#pushResumeUrl');
-  let contentType ='application/json';
+  let contenttype ='application/json';
   //location.href = $('#pushResumeUrl').val();
   exJax('GET', url, nextStep, contenttype, payload);
 }
