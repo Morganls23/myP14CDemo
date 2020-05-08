@@ -139,7 +139,8 @@ function validateOtp() {
 function continue_push() {
   //location.href=authUrl + '/' + environmentId + '/flows/' + flowId;
   console.log('continue push called');
-  let url = $('#pushResumeUrl');
+  //let url = $('#pushResumeUrl');
+  let url = authUrl + '/' + environmentId + '/flows/' + flowId;
   let contenttype ='application/json';
   //location.href = $('#pushResumeUrl').val();
   console.log('url ' + url);
