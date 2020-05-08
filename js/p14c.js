@@ -138,7 +138,11 @@ function validateOtp() {
 
 function continue_push() {
   //location.href=authUrl + '/' + environmentId + '/flows/' + flowId;
-  location.href = $('#pushResumeUrl').val();
+  console.log('continue push called');
+  let url = $('#pushResumeUrl');
+  let contentType ='application/json';
+  //location.href = $('#pushResumeUrl').val();
+  exJax('GET', url, nextStep, contenttype, payload);
 }
 
 function nextStep(data) {
