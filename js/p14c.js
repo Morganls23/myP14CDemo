@@ -173,6 +173,7 @@ function nextStep(data) {
       $('#forgotPasswordURL').val(data._links["password.forgot"].href);
       $('#socialLoginUrl').val(data._embedded.socialProviders[0]._links.authenticate.href);
       $('#partnerLoginUrl').val(data._embedded.socialProviders[1]._links.authenticate.href);
+      $('#ppDiv').hide('');
       break;
     case 'VERIFICATION_CODE_REQUIRED':
       console.log('Rendering Verification code form');
@@ -182,6 +183,7 @@ function nextStep(data) {
       $('#pwResetCodeDiv').hide();
       $('#changePasswordDiv').hide();
       $('#verifyUserUrl').val(data._links['user.verify'].href);
+      $('#ppDiv').hide('');
       break;
     case 'PASSWORD_REQUIRED':
       console.log('Rendering login form');
@@ -192,6 +194,7 @@ function nextStep(data) {
       $('#changePasswordDiv').hide();
       $('#validatePasswordUrl').val(data._embedded.requiredStep._links['usernamePassword.check'].href);
       $('#validatePasswordContentType').val('application/vnd.pingidentity.usernamePassword.check+json');
+      $('#ppDiv').hide('');
       break;
     case 'OTP_REQUIRED':
       console.log('Rendering otp form');
@@ -202,6 +205,7 @@ function nextStep(data) {
       $('#changePasswordDiv').hide();
       $('#validateOtpUrl').val(data._links['otp.check'].href);
       $('#validateOtpContentType').val('application/vnd.pingidentity.otp.check+json')
+      $('#ppDiv').hide('');
       break;
     case 'PUSH_CONFIRMATION_REQUIRED':
       console.log('Rendering wait for push form');
@@ -211,6 +215,7 @@ function nextStep(data) {
       $('#pwResetCodeDiv').hide();
       $('#changePasswordDiv').hide();
       $('#pushResumeUrl').val(data._links["device.select"].href);
+      $('#ppDiv').hide('');
       break;
     case 'MUST_CHANGE_PASSWORD':
       console.log('Rendering password form');
@@ -221,6 +226,7 @@ function nextStep(data) {
       $('#changePasswordDiv').show();
       $('#changePasswordUrl').val(data._links['password.reset'].href);
       $('#changePasswordContentType').val('application/vnd.pingidentity.password.reset+json')
+      $('#ppDiv').hide('');
       break;
     case 'RECOVERY_CODE_REQUIRED':
     console.log('Rendering password form');
@@ -232,6 +238,7 @@ function nextStep(data) {
       $('#changePasswordUrl').val(data._links['password.reset'].href);
       $('#pwcodeUrl').val(data._links['password.recover'].href);
       $('#changePasswordContentType').val('application/vnd.pingidentity.password.reset+json')
+      $('#ppDiv').hide('');
       break;
     case 'COMPLETED':
       console.log('completed authentication successfully');
@@ -242,10 +249,24 @@ function nextStep(data) {
       $('#pwResetCodeDiv').hide();
       $('#warningMessage').text('');
       $('#warningDiv').hide();
+      $('#ppDiv').hide('');
       console.log('Redirecting user');
       console.log(data);
       window.location.replace(data.resumeUrl);
       break;
+    case 'PROFILE_DATA_REQUIRED':
+    console.log('rendering PP form');
+      $('#loginDiv').hide();
+      $('#otpDiv').hide();
+      $('#pushDiv').hide();
+      $('#changePasswordDiv').hide();
+      $('#pwResetCodeDiv').hide();
+      $('#warningMessage').hide('');
+      $('#warningDiv').hide();
+      $('#ppDiv').text('');
+      $('#promptText').val(data._embedded.promptText);
+
+    break;
     default:
       console.log('Unexpected outcome');
       break;
@@ -962,4 +983,15 @@ function verifyUser(){
 
 function redirect_toReg(){
   location.href = 'https://morganapps.ping-eng.com/myP14CDemo/content/finance/register.html?' + 'environmentId=' + environmentId + '&flowId=' + flowId;
+}
+
+
+
+//Progessivce Profile
+
+function ppUpdate(){
+  console.log('Progessive profile called');
+  let givenname = $('#givenname').val();
+  let lastname = $('#lastname').val();
+
 }
