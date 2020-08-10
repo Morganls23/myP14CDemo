@@ -264,8 +264,6 @@ function nextStep(data) {
       $('#warningMessage').hide('');
       $('#warningDiv').hide();
       $('#ppDiv').text('');
-      $('#promptText').val(data._embedded.promptText);
-
     break;
     default:
       console.log('Unexpected outcome');
@@ -988,10 +986,3 @@ function redirect_toReg(){
 
 
 //Progessivce Profile
-
-function ppUpdate(){
-  console.log('Progessive profile called');
-  let givenname = $('#givenname').val();
-  let lastname = $('#lastname').val();
-
-}
